@@ -8,7 +8,7 @@ def print_version():
 
 # prints the app help message
 def print_help(missing_arg=None):
-    print("Usage: bin.js -i <txt_filename> or <folder_containing_txt_files>  [-s <css-link>]\n")
+    print("Usage: convert.py -i <txt_filename> or <folder_containing_txt_files>  [-s <css-link>]\n")
     print("Options:")
     print("  -i, --input\t\tInput .txt file(s)\t\t" + "[string] [required]".rjust(24))
     print("  -s, --stylesheet\tOptional CSS Link \t\t" + "[string] [default: \"\"]".rjust(24))
