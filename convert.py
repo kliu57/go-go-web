@@ -1,5 +1,5 @@
 import sys
-import re
+# import re
 import os
 
 # prints the app version
@@ -99,8 +99,7 @@ if __name__ == '__main__':
     args = sys.argv[1:]
 
     # check if user specified any arguments
-    if args: 
-
+    if args:
         option_name = args[0]
 
         if option_name == "-v" or option_name == "--version":
@@ -112,6 +111,10 @@ if __name__ == '__main__':
             # default output folder path and css url
             output_folder = "output"
             css_url = None
+
+            # create default output folder if it does not exist
+            if not os.path.exists(output_folder):
+                os.makedirs(output_folder)
 
             file_names = args[1:]
 
@@ -155,8 +158,6 @@ if __name__ == '__main__':
                     # read the next option
                     args = args[2:]
 
-
-
                 # check if the path given is for existing file, existing folder, or non-existent
                 if os.path.isfile(path):
                     convert_txt_html(path, output_folder, css_url)
@@ -173,22 +174,9 @@ if __name__ == '__main__':
 
                 else:  
                     print("Error: file cannot be found")
-
-
             else:
                 print_help("Missing required argument: <txt_filename> or <folder_containing_txt_files>")
-                
-
-
         else:
             print_help("Invalid option: " + option_name)
-
-    
     else:
         print_help()
-
-        
-
-
-    
-    
