@@ -109,7 +109,7 @@ if __name__ == '__main__':
         elif option_name == "-i" or option_name == "--input":
 
             # default output folder path and css url
-            output_folder = "output"
+            output_folder = "til"
             css_url = None
 
             # create default output folder if it does not exist
