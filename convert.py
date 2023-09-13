@@ -8,7 +8,7 @@ def print_version():
 
 # prints the app help message
 def print_help(error_msg = None):
-    print("Usage: convert.py -i <txt_filename> or <folder_containing_txt_files>  [-o <output-dir>] [-s <css-link>]\n")
+    print("Usage: convert.py -i <txt_filename> or <folder_containing_txt_files>  [-o <output_dir>] [-s <css_url>]\n")
     print("Options:")
     print("  -i, --input\t\tInput directory or .txt file\t" + "[string] [required]".rjust(24))
     print("  -o, --output\t\tSpecify output directory\t" + "[string] [default: \"\"]".rjust(24))
@@ -141,7 +141,7 @@ if __name__ == '__main__':
                             # set the output_folder
                             output_folder = output_args[0]
                         else:
-                            print_help("Missing required argument: <output-dir>")
+                            print_help("Missing required argument: <output_dir>")
 
                     elif option_name == "-s" or option_name == "--stylesheet":
                         # get file path of stylesheet specified by user in succeeding argument
@@ -151,7 +151,7 @@ if __name__ == '__main__':
                             # set the css file path
                             css_url = css_args[0]
                         else:
-                            print_help("Missing required argument: <css-link>")
+                            print_help("Missing required argument: <css_url>")
                     else:
                         print_help("Invalid option: " + option_name)
                     
