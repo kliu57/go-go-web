@@ -1,5 +1,4 @@
 import sys
-# import re
 import os
 
 # prints the app version
@@ -87,9 +86,9 @@ def convert_txt_html(path, output_folder, css_url):
             output_file.write(f'</body>\n')
             output_file.write(f'</html>')
         
-        print(output_fname + " created successfully!")
+        print(path.replace(os.sep, '/') + " converted to " + output_fpath + " successfully!")
     else:
-        print("Error: file extension should be .txt")
+        print("Error: " + path.replace(os.sep, '/') + " was not converted. File extension should be .txt")
 
 
 # only triggered when we call this .py file and not during imports
