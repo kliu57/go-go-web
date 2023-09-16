@@ -57,4 +57,4 @@ Output can be found in til folder.
 
 ## License
 
-[License (MIT)](LICENSE)
+[License (MIT)](LICENSE.md)
