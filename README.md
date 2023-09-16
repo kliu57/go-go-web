@@ -4,11 +4,11 @@ Command-line tool that converts input .txt files into .html files.
 
 ## Features
 
-- `v0.0.1` converts TIL post (.txt file) into .html file
+- `v0.0.1` converts TIL post (.txt file) into .html file, specify output location, specify stylesheet url, view app version, view app help message
 
 ## Installation
 
-1. Install the latest version of python [python downloads](https://www.python.org/downloads/).
+1. Install the latest version of [python](https://www.python.org/downloads/).
 
    `python --version`
    
@@ -51,3 +51,6 @@ Output can be found in til folder.
 ### Specify Stylesheet
 
 `python convert.py -i <file or folder path> -s <stylesheet url>`
+
+#### Example
+`python convert.py -i input/examples.txt -s https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0`
