@@ -54,3 +54,7 @@ Output can be found in til folder.
 
 #### Example
 `python convert.py -i input/examples.txt -s https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0`
+
+## License
+
+[License (MIT)](LICENSE)
