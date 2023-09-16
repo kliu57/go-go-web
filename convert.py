@@ -1,5 +1,6 @@
 import sys
 import os
+import shutil
 
 # prints the app version
 def print_version():
@@ -111,9 +112,35 @@ if __name__ == '__main__':
             output_folder = "til"
             css_url = None
 
-            # create default output folder if it does not exist
-            if not os.path.exists(output_folder):
-                os.makedirs(output_folder)
+            # delete default output folder
+            if os.path.exists(output_folder):
+                for f in os.listdir(output_folder):
+                    os.remove(os.path.join(output_folder, f))
+                os.rmdir(output_folder)
+                print(output_folder + " folder deleted")
+
+            # create default output folder
+            os.makedirs(output_folder)
+            print(output_folder + " folder created")
+
+            # check if default folder exists
+            # if os.path.exists(output_folder) and os.path.isdir(output_folder):
+            #     try:
+            #         # remove all files in folder
+            #         for filename in os.listdir(output_folder):
+            #             file_path = os.path.join(output_folder, filename)
+            #             if os.path.isfile(file_path):
+            #                 os.remove(file_path)
+                    
+            #         # Remove the folder after all files are deleted
+            #         os.rmdir(output_folder)
+            #         print(f"Folder '{output_folder}' deleted.")
+            #     except OSError as e:
+            #         print(f"Error: {e}")
+
+            # # create default output folder
+            # os.makedirs(output_folder)
+            # print(f"New folder '{output_folder}' created.")
 
             file_names = args[1:]
 
