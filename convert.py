@@ -49,7 +49,7 @@ def convert_txt_html(path, output_folder, css_url):
         output_fpath = output_folder + output_fname
 
         # open input and output files
-        with open(path, mode='r') as input_file, open(output_fpath, mode='w') as output_file:
+        with open(path, mode='r', encoding="utf-8") as input_file, open(output_fpath, mode='w', encoding="utf-8") as output_file:
 
             # write html head
             output_file.write(f'<!doctype html>\n')
@@ -123,24 +123,7 @@ if __name__ == '__main__':
             os.makedirs(output_folder)
             print(output_folder + " folder created")
 
-            # check if default folder exists
-            # if os.path.exists(output_folder) and os.path.isdir(output_folder):
-            #     try:
-            #         # remove all files in folder
-            #         for filename in os.listdir(output_folder):
-            #             file_path = os.path.join(output_folder, filename)
-            #             if os.path.isfile(file_path):
-            #                 os.remove(file_path)
-                    
-            #         # Remove the folder after all files are deleted
-            #         os.rmdir(output_folder)
-            #         print(f"Folder '{output_folder}' deleted.")
-            #     except OSError as e:
-            #         print(f"Error: {e}")
 
-            # # create default output folder
-            # os.makedirs(output_folder)
-            # print(f"New folder '{output_folder}' created.")
 
             file_names = args[1:]
 
