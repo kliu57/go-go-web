@@ -1,13 +1,16 @@
 import sys
 import os
-import shutil
 
 # prints the app version
 def print_version():
-    print("go-go-web " + open("_version.py", "r").read())
+    """Function printing app version."""
+    with open("_version.py", "r", encoding="utf-8") as file:
+        print("go-go-web " + file.read())
+
 
 # prints the app help message
-def print_help(error_msg = None):
+def print_help():
+    """Function printing usage message."""
     print("Usage: convert.py -i <txt_filename> or <folder_containing_txt_files>  [-o <output_dir>] [-s <css_url>]\n")
     print("Options:")
     print("  -i, --input\t\tInput directory or .txt file\t" + "[string] [required]".rjust(24))
@@ -15,14 +18,11 @@ def print_help(error_msg = None):
     print("  -s, --stylesheet\tOptional CSS Link \t\t" + "[string] [default: \"\"]".rjust(24))
     print("  -h, --help\t\tPrint this help message\t\t" + "[boolean]".rjust(24))
     print("  -v, --version\t\tPrint version number\t\t" + "[boolean]".rjust(24))
-
-    if error_msg:
-        print("\n" + error_msg)
-    
     sys.exit()
 
 # takes an input file path for a .txt file, and outputs an .html file
 def convert_txt_html(path, output_folder, css_url):
+    """Function converting one txt file to html"""
 
     # at slash at end of folder path if it is not there
     if output_folder[-1] != "/":
@@ -52,18 +52,18 @@ def convert_txt_html(path, output_folder, css_url):
         with open(path, mode='r', encoding="utf-8") as input_file, open(output_fpath, mode='w', encoding="utf-8") as output_file:
 
             # write html head
-            output_file.write(f'<!doctype html>\n')
-            output_file.write(f'<html lang="en">\n')
-            output_file.write(f'<head>\n')
-            output_file.write(f'\t<meta charset="utf-8">\n')
+            output_file.write('<!doctype html>\n')
+            output_file.write('<html lang="en">\n')
+            output_file.write('<head>\n')
+            output_file.write('\t<meta charset="utf-8">\n')
             output_file.write(f'\t<title>{title}</title>\n')
-            output_file.write(f'\t<meta name="viewport" content="width=device-width, initial-scale=1">\n')
+            output_file.write('\t<meta name="viewport" content="width=device-width, initial-scale=1">\n')
             if css_url:
                 output_file.write(f'\t<link rel="stylesheet" href="{css_url}">\n')
-            output_file.write(f'</head>\n')
+            output_file.write('</head>\n')
 
             # write html body
-            output_file.write(f'<body>\n')
+            output_file.write('<body>\n')
             output_file.write(f'<h1>{title}</h1>\n')
 
             # read each line in input file
@@ -150,7 +150,8 @@ if __name__ == '__main__':
                             # set the output_folder
                             output_folder = output_args[0]
                         else:
-                            print_help("Missing required argument: <output_dir>")
+                            print("Missing required argument: <output_dir>")
+                            print_help()
 
                     elif option_name == "-s" or option_name == "--stylesheet":
                         # get file path of stylesheet specified by user in succeeding argument
@@ -160,9 +161,11 @@ if __name__ == '__main__':
                             # set the css file path
                             css_url = css_args[0]
                         else:
-                            print_help("Missing required argument: <css_url>")
+                            print("Missing required argument: <css_url>")
+                            print_help()
                     else:
-                        print_help("Invalid option: " + option_name)
+                        print("Invalid option: " + option_name)
+                        print_help()
                     
                     # read the next option
                     args = args[2:]
@@ -184,8 +187,11 @@ if __name__ == '__main__':
                 else:  
                     print("Error: file cannot be found")
             else:
-                print_help("Missing required argument: <txt_filename> or <folder_containing_txt_files>")
+                print("Missing required argument: <txt_filename> or <folder_containing_txt_files>")
+                print_help()
         else:
-            print_help("Invalid option: " + option_name)
+            print("Invalid option: " + option_name)
+            print_help()
     else:
+        print()
         print_help()
