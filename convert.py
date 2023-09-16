@@ -64,7 +64,7 @@ def convert_txt_html(path, output_folder, css_url):
 
             # write html body
             output_file.write('<body>\n')
-            output_file.write(f'<h1>{title}</h1>\n')
+            # output_file.write(f'<h1>{title}</h1>\n')
 
             # read each line in input file
             for line in input_file:
