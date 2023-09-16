@@ -28,7 +28,7 @@ Command-line tool that converts input .txt files into .html files.
 
 `python convert.py --version` or `python convert.py --v`
 
-### View Usage Options
+### View Usage Message
 
 `python convert.py --help` or `python convert.py --h`
 
@@ -44,6 +44,9 @@ Output can be found in til folder.
 ### Specify Output Location
 
 `python convert.py -i <file or folder path> -o <folder path>`
+
+#### Example
+`python convert.py -i input/examples.txt -o input`
 
 ### Specify Stylesheet
 
