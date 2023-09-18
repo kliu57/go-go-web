@@ -15,7 +15,7 @@ def print_help():
     print("Options:")
     print("  -i, --input\t\tInput directory or .txt file\t" + "[string] [required]".rjust(24))
     print("  -o, --output\t\tSpecify output directory\t" + "[string] [default: \"\"]".rjust(24))
-    print("  -s, --stylesheet\tSpecify url for CSS stylesheet \t\t" + "[string] [default: \"\"]".rjust(24))
+    print("  -s, --stylesheet\tSpecify url for CSS stylesheet \t" + "[string] [default: \"\"]".rjust(24))
     print("  -h, --help\t\tPrint this help message\t\t" + "[boolean]".rjust(24))
     print("  -v, --version\t\tPrint version number\t\t" + "[boolean]".rjust(24))
     sys.exit()
