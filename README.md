@@ -12,7 +12,7 @@ Command-line tool that converts input .txt files into .html files.
 
    `python --version`
    
-2. Clone this repository locally.
+2. Open a terminal and navigate to where you want go-go-web to be stored. Clone this repository locally.
     
    `git clone https://github.com/kliu57/go-go-web.git`
 
