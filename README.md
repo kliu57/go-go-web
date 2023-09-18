@@ -8,17 +8,17 @@ Command-line tool that converts input .txt files into .html files.
 
 ## Installation
 
-1. Install the latest version of [python](https://www.python.org/downloads/).
+1. Download and install the latest version of [python](https://www.python.org/downloads/). Open a terminal and check that it is installed.
 
    `python --version`
    
-2. Clone this repository locally
+2. Clone this repository locally.
     
    `git clone https://github.com/kliu57/go-go-web.git`
 
    `cd go-go-web`
    
-3. Check that you have the latest version of the app
+3. Check that you have the latest version of the app.
 
    `python convert.py --version`
 
