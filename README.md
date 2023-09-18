@@ -39,7 +39,7 @@ Command-line tool that converts input .txt files into .html files.
 `python convert.py -i <file or folder path>`
 
 #### Example 1 (Convert one file)
-`python convert.py -i ./examples/examples.txt`
+`python convert.py -i ./examples/til_post1.txt`
 
 #### Example 2 (Convert a folder of files)
 `python convert.py -i ./examples`
@@ -60,7 +60,7 @@ Output(s) can be found in til folder.
 `python convert.py -i <file or folder path> -s <stylesheet url>`
 
 #### Example
-`python convert.py -i ./examples/examples.txt -s https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css`
+`python convert.py -i ./examples/til_post2.txt -s https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css`
 </br></br>
 
 ## License
