@@ -27,7 +27,7 @@ Command-line tool that converts input .txt files into .html files.
 ### View App Version
 
 `python convert.py --version` or `python convert.py --v`
-</br>
+</br></br>
 
 ### View Usage Message
 
