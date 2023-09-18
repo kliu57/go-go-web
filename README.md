@@ -26,11 +26,13 @@ Command-line tool that converts input .txt files into .html files.
 
 ### View App Version
 
-`python convert.py --version` or `python convert.py --v`\
+`python convert.py --version` or `python convert.py --v`
+</br>
 
 ### View Usage Message
 
-`python convert.py --help` or `python convert.py --h`\
+`python convert.py --help` or `python convert.py --h`
+</br>
 
 ### Convert .txt to .html
 
@@ -42,7 +44,8 @@ Command-line tool that converts input .txt files into .html files.
 #### Example 2 (Convert a folder of files)
 `python convert.py -i ./examples`
 
-Output can be found in til folder.
+Output(s) can be found in til folder.
+</br>
 
 ### Specify Output Location
 
@@ -50,6 +53,7 @@ Output can be found in til folder.
 
 #### Example
 `python convert.py -i ./examples/examples.txt -o ./examples`
+</br>
 
 ### Specify Stylesheet
 
@@ -57,6 +61,7 @@ Output can be found in til folder.
 
 #### Example
 `python convert.py -i ./examples/examples.txt -s https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css`
+</br>
 
 ## License
 
