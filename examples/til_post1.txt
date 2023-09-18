@@ -1,0 +1,23 @@
+TIL Post 1
+
+Today I learned how to work with GitHub and VS Code to push changes!
+
+First, I cloned my project to my local machine:
+git clone <url>
+
+Next, I checked that I have the most recent changes:
+git pull origin
+
+I worked on my project locally and make changes to the project
+
+When I was ready to push changes, I check which files have been changed:
+git status
+
+I added the files with changes:
+git add <filename>
+
+I made a commit and write a message:
+git commit -m <what I have changed>
+
+I pushed my changes to GitHub:
+git push origin
