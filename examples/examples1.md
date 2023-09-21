@@ -1,4 +1,4 @@
-This is the first paragraph of example1.md.
+This is the first **Bold** paragraph of example1.md.
 
 This is the second paragraph of example1.md.
 
