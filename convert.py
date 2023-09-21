@@ -1,3 +1,4 @@
+import re
 import sys
 import os
 
@@ -21,7 +22,7 @@ def print_help():
     sys.exit()
 
 # takes an input file path for a .txt file, and outputs an .html file
-def convert_txt_html(path, output_folder, css_url):
+def convert_txt_md_html(path, output_folder, css_url):
     """Function converting one txt file to html"""
 
     # at slash at end of folder path if it is not there
@@ -41,7 +42,7 @@ def convert_txt_html(path, output_folder, css_url):
     file_ext = path_tup[1]
     
     # check if input file has a valid extension
-    if file_ext == ".txt":
+    if file_ext in ( ".txt" ,".md"):
         title = os.path.basename(file_name)
         output_fname = title + ".html"
 
@@ -64,7 +65,6 @@ def convert_txt_html(path, output_folder, css_url):
 
             # write html body
             output_file.write('<body>\n')
-            # output_file.write(f'<h1>{title}</h1>\n')
 
             # read each line in input file
             for line in input_file:
@@ -72,16 +72,23 @@ def convert_txt_html(path, output_folder, css_url):
                 # trim the line of whitespace and newline character
                 line = line.strip()
 
-                # split string (using space as delimiter) into list of words
-                #words = line.split()
+                if file_ext == ".md" :
+                    # Replace *italic* and _italic_ with <em>italic</em>
+                    line = re.sub(r'[^*]\*([^*]+)\*', r'<em>\1</em>', line)
+                    line = re.sub(r'[^_]_([^_]+)_', r'<em>\1</em>', line)
 
-                # check if line is empty string
+                    # Replace **bold** and __bold__ with <strong>bold</strong>
+                    line = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', line)
+                    line = re.sub(r'__([^_]+)__', r'<strong>\1</strong>', line)
+    
                 if line:
+                    # check if line is empty string
                     # write the line to the output file wrapped in the paragraph tag
                     output_file.write(f'<p>{line}</p>\n')
                 else:
                     # write an empty line to the output file
                     output_file.write(f'\n')
+
 
             # write closing tags
             output_file.write(f'</body>\n')
@@ -172,7 +179,7 @@ if __name__ == '__main__':
 
                 # check if the path given is for existing file, existing folder, or non-existent
                 if os.path.isfile(path):
-                    convert_txt_html(path, output_folder, css_url)
+                    convert_txt_md_html(path, output_folder, css_url)
                 elif os.path.isdir(path): 
                     # get each item in the folder
                     for item in os.listdir(path):
@@ -182,7 +189,7 @@ if __name__ == '__main__':
 
                         # check if item is a file
                         if os.path.isfile(file_path):
-                            convert_txt_html(file_path, output_folder, css_url)
+                            convert_txt_md_html(file_path, output_folder, css_url)
 
                 else:  
                     print("Error: file cannot be found")
