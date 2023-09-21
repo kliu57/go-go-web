@@ -4,6 +4,7 @@ Command-line tool that converts input .txt files into .html files.
 
 ## Features
 
+- `v0.0.2`  add converts TIL post (.md file) into .html and parse italic and bold for Markdown file.
 - `v0.0.1` converts TIL post (.txt file) into .html file, specify output location, specify stylesheet url, view app version, view app help message
 
 ## Installation
