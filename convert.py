@@ -74,7 +74,7 @@ def convert_txt_md_html(path, output_folder, css_url):
 
                 if file_ext == ".md" :
                     # Replace *italic* and _italic_ with <em>italic</em>
-                    line = re.sub(r'[^*]\*([^*]+)\*', r'<em>\1</em>', line)
+                    line = re.sub(r'([^*])\*([^*]+)\*', r'\1<em>\2</em>', line)
                     line = re.sub(r'[^_]_([^_]+)_', r'<em>\1</em>', line)
 
                     # Replace **bold** and __bold__ with <strong>bold</strong>
