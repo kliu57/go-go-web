@@ -99,6 +99,9 @@ def convert_to_html(path, output_folder, css_url):
                             line = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', line)
                             line = re.sub(r'__([^_]+)__', r'<strong>\1</strong>', line)
 
+                            # Replace --- with <hr />
+                            line = re.sub(r'^[ ]*---[-]*[ ]*$', r'<hr />', line)
+
                             # Replace `text` with <code>text</code>
                             line = re.sub(r'`(.*)`', r'<code>\1</code>', line)
 
@@ -112,7 +115,6 @@ def convert_to_html(path, output_folder, css_url):
 
                         if num_found > 0:
                             in_code_block = False
-
                 if line:
                     # write the line to the output file
                     output_file.write(f'{line}\n')
