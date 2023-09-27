@@ -54,6 +54,9 @@ def convert_to_html(path, output_folder, css_url):
         # use the input file name as the output file name
         output_fpath = output_folder + output_fname
 
+        # flag which signifies if text is inside a code block
+        in_code_block = False
+
         # open input and output files
         with open(path, mode='r', encoding="utf-8") as input_file, open(output_fpath, mode='w', encoding="utf-8") as output_file:
 
@@ -78,18 +81,41 @@ def convert_to_html(path, output_folder, css_url):
                 line = line.strip()
 
                 if file_ext == ".md" :
-                    # Replace *italic* and _italic_ with <em>italic</em>
-                    line = re.sub(r'([^*])\*([^*]+)\*', r'\1<em>\2</em>', line)
-                    line = re.sub(r'[^_]_([^_]+)_', r'<em>\1</em>', line)
+                    # If text is not inside a code block, must parse styled text
+                    if not in_code_block:
+                        # Look for beginning of code block (```)
+                        result_tup = re.subn(r'^[ ]*```.*$', r'<pre>', line)
+                        line = result_tup[0]
+                        num_found = result_tup[1]
 
-                    # Replace **bold** and __bold__ with <strong>bold</strong>
-                    line = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', line)
-                    line = re.sub(r'__([^_]+)__', r'<strong>\1</strong>', line)
-    
+                        if num_found > 0:
+                            in_code_block = True
+                        else:
+                            # Replace *italic* and _italic_ with <em>italic</em>
+                            line = re.sub(r'([^*])\*([^*]+)\*', r'\1<em>\2</em>', line)
+                            line = re.sub(r'[^_]_([^_]+)_', r'<em>\1</em>', line)
+
+                            # Replace **bold** and __bold__ with <strong>bold</strong>
+                            line = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', line)
+                            line = re.sub(r'__([^_]+)__', r'<strong>\1</strong>', line)
+
+                            # Replace `text` with <code>text</code>
+                            line = re.sub(r'`(.*)`', r'<code>\1</code>', line)
+
+                            # Line is not in code block, so wrap line in paragraph tag
+                            line = "<p>" + line + "</p>"
+                    else:
+                        # Look for end of code block (```)
+                        result_tup = re.subn(r'^[ ]*```[`]*[ ]*$', r'</pre>', line)
+                        line = result_tup[0]
+                        num_found = result_tup[1]
+
+                        if num_found > 0:
+                            in_code_block = False
+
                 if line:
-                    # check if line is empty string
-                    # write the line to the output file wrapped in the paragraph tag
-                    output_file.write(f'<p>{line}</p>\n')
+                    # write the line to the output file
+                    output_file.write(f'{line}\n')
                 else:
                     # write an empty line to the output file
                     output_file.write(f'\n')

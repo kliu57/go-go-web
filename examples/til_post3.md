@@ -9,3 +9,13 @@ I chose to write my program in *Python* while she used *Java*. Aside from syntax
 When I tested **Yumei**'s program, I was able to find some bugs that she could not find herself. For example, I am a Windows user and she is a Mac user. There is an installation step that is not applicable to Windows users. I also found a runtime error that occurred when I specified the output flag but gave no output directory.
 
 We were able to close all our issues after our successful collaboration! I learned from looking at her code more ways to handle exceptions and more ways to find bugs (using the Pylint extension). I also got some insight on how the logic I wrote in Python can be done in Java. Finally, this collaboration not only helped our programming skills but also our testing, documentation, and communication skills as we worked together to identify and fix issues.
+
+---
+
+Also, I recently learned how to checkout branches using `git checkout`! Here is an example below:
+
+```sh
+$ git checkout main
+$ git checkout -b issue-10
+$ git checkout -b issue-11
+```
