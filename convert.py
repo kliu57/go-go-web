@@ -20,7 +20,7 @@ def remake_til_folder():
             shutil.rmtree(DEFAULT_OUTPUT)
             print(DEFAULT_OUTPUT + " folder deleted")
         except OSError as e:
-            print("Error: %s - %s." % (e.filename, e.strerror))
+            print(e)
             sys.exit()
 
     # create default output folder
