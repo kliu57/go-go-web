@@ -1,29 +1,34 @@
+import pathlib
 import re
 import sys
 import os
+import argparse
+import shutil
 
-# prints the app version
+DEFAULT_OUTPUT = "til"
+
 def print_version():
     """Function printing app version."""
     with open("_version.py", "r", encoding="utf-8") as file:
         print("go-go-web " + file.read())
 
+def remake_til_folder():
+    """Function removes existing default output folder and recreates it."""
+    # delete default output folder
+    if os.path.exists(DEFAULT_OUTPUT):
+        try:
+            shutil.rmtree(DEFAULT_OUTPUT)
+            print(DEFAULT_OUTPUT + " folder deleted")
+        except OSError as e:
+            print("Error: %s - %s." % (e.filename, e.strerror))
+            sys.exit()
 
-# prints the app help message
-def print_help():
-    """Function printing usage message."""
-    print("Usage: convert.py -i <txt_filename> or <folder_containing_txt_files>  [-o <output_dir>] [-s <css_url>]\n")
-    print("Options:")
-    print("  -i, --input\t\tInput directory or .txt file\t" + "[string] [required]".rjust(24))
-    print("  -o, --output\t\tSpecify output directory\t" + "[string] [default: \"\"]".rjust(24))
-    print("  -s, --stylesheet\tSpecify url for CSS stylesheet \t" + "[string] [default: \"\"]".rjust(24))
-    print("  -h, --help\t\tPrint this help message\t\t" + "[boolean]".rjust(24))
-    print("  -v, --version\t\tPrint version number\t\t" + "[boolean]".rjust(24))
-    sys.exit()
+    # create default output folder
+    os.makedirs(DEFAULT_OUTPUT)
+    print(DEFAULT_OUTPUT + " folder created")
 
-# takes an input file path for a .txt file, and outputs an .html file
-def convert_txt_md_html(path, output_folder, css_url):
-    """Function converting one txt file to html"""
+def convert_to_html(path, output_folder, css_url):
+    """Function converting one .txt or .md TIL post to html"""
 
     # at slash at end of folder path if it is not there
     if output_folder[-1] != "/":
@@ -42,7 +47,7 @@ def convert_txt_md_html(path, output_folder, css_url):
     file_ext = path_tup[1]
     
     # check if input file has a valid extension
-    if file_ext in ( ".txt" ,".md"):
+    if file_ext in (".txt", ".md"):
         title = os.path.basename(file_name)
         output_fname = title + ".html"
 
@@ -89,7 +94,6 @@ def convert_txt_md_html(path, output_folder, css_url):
                     # write an empty line to the output file
                     output_file.write(f'\n')
 
-
             # write closing tags
             output_file.write(f'</body>\n')
             output_file.write(f'</html>')
@@ -98,107 +102,56 @@ def convert_txt_md_html(path, output_folder, css_url):
     else:
         print("Error: " + path.replace(os.sep, '/') + " was not converted. File extension should be .txt")
 
-
 # only triggered when we call this .py file and not during imports
 if __name__ == '__main__':
 
-    # get list of all arguments user typed in command line after calling this .py file with "python convert.py"
-    args = sys.argv[1:]
+    formatter = lambda prog: argparse.HelpFormatter(prog, max_help_position=52)
+    parser = argparse.ArgumentParser(formatter_class=formatter, description="convert txt or md file or folder of files to html")
+    parser.add_argument("-v", "--version", action="store_true", help="display the app version")
+    parser.add_argument("-o", "--output", type=pathlib.Path, help="specify output directory")
+    parser.add_argument("-s", "--stylesheet", type=str, help="specify url for CSS stylesheet")
+    parser.add_argument("fname", nargs='?', type=pathlib.Path, help="the input file or folder path")
+    args = parser.parse_args()
 
-    # check if user specified any arguments
-    if args:
-        option_name = args[0]
-
-        if option_name == "-v" or option_name == "--version":
-            print_version()
-        elif option_name == "-h" or option_name == "--help":
-            print_help()
-        elif option_name == "-i" or option_name == "--input":
-
+    if args.version:
+        print_version()
+    else:
+        if args.fname:
             # default output folder path and css url
-            output_folder = "til"
+            output_folder = DEFAULT_OUTPUT
             css_url = None
 
-            # delete default output folder
-            if os.path.exists(output_folder):
-                for f in os.listdir(output_folder):
-                    os.remove(os.path.join(output_folder, f))
-                os.rmdir(output_folder)
-                print(output_folder + " folder deleted")
+            # remove and recreate default output folder
+            remake_til_folder()
 
-            # create default output folder
-            os.makedirs(output_folder)
-            print(output_folder + " folder created")
+            # get input file path from user input
+            path = str(args.fname)
 
-
-
-            file_names = args[1:]
-
-            # check if use provided file name or folder name argument
-            if file_names:
-
-                # get the first file name argument provided by the user
-                path = file_names[0]
-
-                # get succeeding arguments to check if user specified an output directory or stylesheet
-                args = file_names[1:]
+            if args.stylesheet:
+                # get css url from user input
+                css_url = args.stylesheet
                 
-                i = 0
-                max_input_options = 2
+            if args.output:
+                # get output folder path from user input
+                output_folder = str(args.output)
 
-                while args and i < max_input_options:
-                    option_name = args[0]
+            # check if the input file or folder path EXISTS
+            if os.path.isfile(path):
+                # convert file to html
+                convert_to_html(path, output_folder, css_url)
+            elif os.path.isdir(path): 
+                # get each item in the folder
+                for item in os.listdir(path):
+                    # get the file path
+                    file_path = os.path.join(path, item)
 
-                    if option_name == "-o" or option_name == "--output":
-                        # get output path specified by user in succeeding argument
-                        output_args = args[1:]
-
-                        if output_args:
-                            # set the output_folder
-                            output_folder = output_args[0]
-                        else:
-                            print("Missing required argument: <output_dir>")
-                            print_help()
-
-                    elif option_name == "-s" or option_name == "--stylesheet":
-                        # get file path of stylesheet specified by user in succeeding argument
-                        css_args = args[1:]
-
-                        if css_args:
-                            # set the css file path
-                            css_url = css_args[0]
-                        else:
-                            print("Missing required argument: <css_url>")
-                            print_help()
-                    else:
-                        print("Invalid option: " + option_name)
-                        print_help()
-                    
-                    # read the next option
-                    args = args[2:]
-
-                # check if the path given is for existing file, existing folder, or non-existent
-                if os.path.isfile(path):
-                    convert_txt_md_html(path, output_folder, css_url)
-                elif os.path.isdir(path): 
-                    # get each item in the folder
-                    for item in os.listdir(path):
-
-                        # get the file path
-                        file_path = os.path.join(path, item)
-
-                        # check if item is a file
-                        if os.path.isfile(file_path):
-                            convert_txt_md_html(file_path, output_folder, css_url)
-
-                else:  
-                    print("Error: file cannot be found")
+                    # check if item is a file
+                    if os.path.isfile(file_path):
+                        # convert file to html
+                        convert_to_html(file_path, output_folder, css_url)
             else:
-                print("Missing required argument: <txt_filename> or <folder_containing_txt_files>")
-                print_help()
+                print(f"Error: File {path} does not exist\n")
+                parser.print_help()
         else:
-            print("Invalid option: " + option_name)
-            print_help()
-    else:
-        print()
-        print_help()
+            print(f"Error: no file or folder name specified")
+            parser.print_help()
