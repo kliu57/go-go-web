@@ -85,7 +85,9 @@ def convert_to_html(path, output_folder, css_url):
                     # Replace **bold** and __bold__ with <strong>bold</strong>
                     line = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', line)
                     line = re.sub(r'__([^_]+)__', r'<strong>\1</strong>', line)
-    
+
+                    # Replace --- with <hr />
+                    line = re.sub(r'^[ ]*---[-]*[ ]*$', r'<hr />', line)
                 if line:
                     # check if line is empty string
                     # write the line to the output file wrapped in the paragraph tag
