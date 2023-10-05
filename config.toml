@@ -1,0 +1,2 @@
+output = "./out"
+stylesheet = "https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css"
