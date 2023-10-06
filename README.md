@@ -20,8 +20,11 @@ Command-line tool that converts input .txt files into .html files.
    `git clone https://github.com/kliu57/go-go-web.git`
 
    `cd go-go-web`
+
+3. Install the tomlkit package
+   `pip install tomlkit`
    
-3. Check that you have the latest version of the app.
+4. Check that you have the latest version of the app.
 
    `python convert.py --version`
 
