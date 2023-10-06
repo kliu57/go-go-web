@@ -51,14 +51,12 @@ Command-line tool that converts input .txt files into .html files.
 `python convert.py ./examples`
 
 Output(s) can be found in til folder.
-</br>
+</br></br>
 
 ### Specify Output Location
 
 `python convert.py <file or folder path> -o <folder path>`
 
-### Specify config file
-`python convert.py ./examples -c config.toml`
 
 #### Example
 `python convert.py ./examples/examples.txt -o ./examples`
@@ -72,6 +70,12 @@ Output(s) can be found in til folder.
 `python convert.py ./examples/til_post2.txt -s https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css`
 </br></br>
 
+
+### Specify config file
+`python convert.py  <file or folder path> -c <config toml file path>`
+#### Example
+`python convert.py ./examples -c config.toml`
+</br></br>
 ## License
 
 [License (MIT)](LICENSE.md)

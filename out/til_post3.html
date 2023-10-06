@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>til_post3</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css">
+</head>
+<body>
+<p>TIL Example Post 3</p>
+<p></p>
+<p><hr /></p>
+<p></p>
+<p>In my second week of exploration with Open Source, I was asked to write a command-line program which converts .txt files to .html. When I completed my working prototype of the app, I found <strong>Yumei</strong> in the Slack open source group channel and we agreed to test each others' code.</p>
+<p></p>
+<p>This is my first time raising issues in another person's project and also my first time fixing the closing the issues she raised in my project. Although the programs we each wrote are short and simple, this really got me more comfortable with collaborating with others on GitHub. Also, it was fun to see how we both created a similar running program; however the code is completely different.</p>
+<p></p>
+<p>I chose to write my program in <em>Python</em> while she used <em>Java</em>. Aside from syntax differences, she has much more exception handling in her code compared to mine. It made me think that I should add more exception handling to my own code. Having another person test my code definitely helps to find more issues! She discovered that I missed implementing the spec for deleting the default output folder at the start of the run. Also, she uses a VS Code extension called Pylint which helped to find many problems with my code. Pylint found many issues with my code which were not best practice, such as not specifying an encoding when reading from a file, or using an f-string that does not have any interpolated variables.</p>
+<p></p>
+<p>When I tested <strong>Yumei</strong>'s program, I was able to find some bugs that she could not find herself. For example, I am a Windows user and she is a Mac user. There is an installation step that is not applicable to Windows users. I also found a runtime error that occurred when I specified the output flag but gave no output directory.</p>
+<p></p>
+<p>We were able to close all our issues after our successful collaboration! I learned from looking at her code more ways to handle exceptions and more ways to find bugs (using the Pylint extension). I also got some insight on how the logic I wrote in Python can be done in Java. Finally, this collaboration not only helped our programming skills but also our testing, documentation, and communication skills as we worked together to identify and fix issues.</p>
+<p></p>
+<p><hr /></p>
+<p></p>
+<p>Also, I recently learned how to checkout branches using <code>git checkout</code>! Here is an example below:</p>
+<p></p>
+<pre>
+$ git checkout main
+$ git checkout -b issue-10
+$ git checkout -b issue-11
+</pre>
+</body>
+</html>
