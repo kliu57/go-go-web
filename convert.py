@@ -9,7 +9,7 @@ from tomlkit.toml_file import TOMLFile
 DEFAULT_OUTPUT = "til"
 
 def print_version():
-    """Function printing app version."""
+    """Function prints app version."""
     with open("_version.py", "r", encoding="utf-8") as file:
         print("go-go-web " + file.read())
 
@@ -20,25 +20,26 @@ def remake_til_folder(out=DEFAULT_OUTPUT):
         try:
             shutil.rmtree(out)
             print(out + " folder deleted")
-        except OSError as e:
-            print(e)
-            sys.exit()
+        except OSError as exception:
+            print(exception)
+            sys.exit(1)
 
     # create default output folder
     os.makedirs(out)
     print(out + " folder created")
 
 def load_config_file(config_file):
-    """Load and parse the TOML configuration file."""
+    """Function returns contents of TOML config file"""
     try:
         toml = TOMLFile(config_file)
-        config_data= toml.read()
-        return config_data
-    except Exception as e:
-        print("Error loading or parsing the config file:", e)
+        config_data_doc = toml.read()
+        return config_data_doc
+    except Exception as exception:
+        print("Error loading or parsing the config file:", exception)
         sys.exit(1)
 
 def convert_to_html(path, output_folder, css_url):
+    """Function converts a file to html"""
     # at slash at end of folder path if it is not there
     if output_folder[-1] != "/":
         output_folder += "/"
@@ -57,13 +58,12 @@ def convert_to_html(path, output_folder, css_url):
     if file_ext == ".md":
         markdown_to_html(path,file_name, output_folder, css_url)
     elif file_ext == ".txt":
-        text_to_html(path,file_name, output_folder, css_url)
+        text_to_html(path, file_name, output_folder, css_url)
     else:
         print("Error: " + path.replace(os.sep, '/') + " was not converted. File extension should be .md or .txt")
 
-
-
-def markdown_to_html(path,file_name, output_folder, css_url):
+def markdown_to_html(path, file_name, output_folder, css_url):
+    """Function converts a markdown file to html"""
     title = os.path.basename(file_name)
     output_fname = title + ".html"
 
@@ -96,8 +96,7 @@ def markdown_to_html(path,file_name, output_folder, css_url):
             # trim the line of whitespace and newline character
             line = line.strip()
 
-            
-                # If text is not inside a code block, must parse styled text
+            # If text is not inside a code block, must parse styled text
             if not in_code_block:
                 # Look for beginning of code block (```)
                 result_tup = re.subn(r'^[ ]*```.*$', r'<pre>', line)
@@ -136,25 +135,22 @@ def markdown_to_html(path,file_name, output_folder, css_url):
                 output_file.write(f'{line}\n')
             else:
                 # write an empty line to the output file
-                output_file.write(f'\n')
+                output_file.write('\n')
 
         # write closing tags
-        output_file.write(f'</body>\n')
-        output_file.write(f'</html>')
+        output_file.write('</body>\n')
+        output_file.write('</html>')
     
     print(path.replace(os.sep, '/') + " converted to " + output_fpath + " successfully!")
 
-
 def text_to_html(path,file_name, output_folder, css_url):
+    """Function converts a txt file to html"""
     # check if input file has a valid extension
     title = os.path.basename(file_name)
     output_fname = title + ".html"
 
     # use the input file name as the output file name
     output_fpath = output_folder + output_fname
-
-    # flag which signifies if text is inside a code block
-    in_code_block = False
 
     # open input and output files
     with open(path, mode='r', encoding="utf-8") as input_file, open(output_fpath, mode='w', encoding="utf-8") as output_file:
@@ -179,20 +175,21 @@ def text_to_html(path,file_name, output_folder, css_url):
             # trim the line of whitespace and newline character
             line = line.strip()
 
-
             if line:
+                # wrap line in paragraph tag
+                line = "<p>" + line + "</p>"
+
                 # write the line to the output file
                 output_file.write(f'{line}\n')
             else:
                 # write an empty line to the output file
-                output_file.write(f'\n')
+                output_file.write('\n')
 
         # write closing tags
-        output_file.write(f'</body>\n')
-        output_file.write(f'</html>')
+        output_file.write('</body>\n')
+        output_file.write('</html>')
     
     print(path.replace(os.sep, '/') + " converted to " + output_fpath + " successfully!")
-
 
 # only triggered when we call this .py file and not during imports
 if __name__ == '__main__':
@@ -209,55 +206,54 @@ if __name__ == '__main__':
     if args.version:
         print_version()
     else:
-            if args.fname:
-                # default output folder path and css url
-                output_folder = DEFAULT_OUTPUT
-                css_url = None
+        if args.fname:
+            # default output folder path and css url
+            output_folder = DEFAULT_OUTPUT
+            css_url = None
 
+            # get input file path from user input
+            path = str(args.fname)
 
-                # get input file path from user input
-                path = str(args.fname)
+            if args.config:
+                # Load and parse the TOML configuration file
+                config_data = load_config_file(args.config)
 
-                if args.config:
-                    # Load and parse the TOML configuration file
-                    config_data = load_config_file(args.config)
-
-                    # Extract configuration options from the parsed data
-                    if "output" in config_data:
-                        output_folder = str(config_data["output"])
-                        remake_til_folder(output_folder)
-                    if "stylesheet" in config_data:
-                        css_url = str(config_data["stylesheet"])
-                else:
-                    if args.stylesheet:
-                        # get css url from user input
-                        css_url = args.stylesheet
-                        
-                    if args.output:
-                        # get output folder path from user input
-                        output_folder = str(args.output)
-                        remake_til_folder(output_folder)
-                    else:
-                        # remove and recreate default output folder
-                        remake_til_folder()
-
-                # check if the input file or folder path EXISTS
-                if os.path.isfile(path):
-                    # convert file to html
-                    convert_to_html(path, output_folder, css_url)
-                elif os.path.isdir(path): 
-                    # get each item in the folder
-                    for item in os.listdir(path):
-                        # get the file path
-                        file_path = os.path.join(path, item)
-
-                        # check if item is a file
-                        if os.path.isfile(file_path):
-                            # convert file to html
-                            convert_to_html(file_path, output_folder, css_url)
-                else:
-                    print(f"Error: File {path} does not exist\n")
-                    parser.print_help()
+                # Extract configuration options from the parsed data
+                if "output" in config_data:
+                    output_folder = str(config_data["output"])
+                    remake_til_folder(output_folder)
+                if "stylesheet" in config_data:
+                    css_url = str(config_data["stylesheet"])
             else:
-                print(f"Error: no file or folder name specified")
+                if args.stylesheet:
+                    # get css url from user input
+                    css_url = args.stylesheet
+                    
+                if args.output:
+                    # get output folder path from user input
+                    output_folder = str(args.output)
+                    remake_til_folder(output_folder)
+                else:
+                    # remove and recreate default output folder
+                    remake_til_folder()
+
+            # check if the input file or folder path EXISTS
+            if os.path.isfile(path):
+                # convert file to html
+                convert_to_html(path, output_folder, css_url)
+            elif os.path.isdir(path): 
+                # get each item in the folder
+                for item in os.listdir(path):
+                    # get the file path
+                    file_path = os.path.join(path, item)
+
+                    # check if item is a file
+                    if os.path.isfile(file_path):
+                        # convert file to html
+                        convert_to_html(file_path, output_folder, css_url)
+            else:
+                print(f"Error: File {path} does not exist\n")
                 parser.print_help()
+        else:
+            print("Error: no file or folder name specified")
+            parser.print_help()
