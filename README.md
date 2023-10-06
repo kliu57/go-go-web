@@ -48,13 +48,14 @@ Command-line tool that converts input .txt files into .html files.
 `python convert.py ./examples`
 
 Output(s) can be found in til folder.
-
-`python convert.py ./examples -c config.toml`
 </br>
 
 ### Specify Output Location
 
 `python convert.py <file or folder path> -o <folder path>`
+
+### Specify config file
+`python convert.py ./examples -c config.toml`
 
 #### Example
 `python convert.py ./examples/examples.txt -o ./examples`
