@@ -4,6 +4,7 @@ Command-line tool that converts input .txt files into .html files.
 
 ## Features
 
+- `v0.0.4` additionally accept TOML config file
 - `v0.0.3` parses code blocks and horizontal rules for .md files
 - `v0.0.2` additionally converts .md files into .html and parses italic and bold for .md files
 - `v0.0.1` converts TIL post (.txt file) into .html file, specify output location, specify stylesheet url, view app version, view app help message
@@ -19,8 +20,11 @@ Command-line tool that converts input .txt files into .html files.
    `git clone https://github.com/kliu57/go-go-web.git`
 
    `cd go-go-web`
+
+3. Install the tomlkit package
+   `pip install tomlkit`
    
-3. Check that you have the latest version of the app.
+4. Check that you have the latest version of the app.
 
    `python convert.py --version`
 
@@ -53,6 +57,7 @@ Output(s) can be found in til folder.
 
 `python convert.py <file or folder path> -o <folder path>`
 
+
 #### Example
 `python convert.py ./examples/examples.txt -o ./examples`
 </br></br>
@@ -65,6 +70,12 @@ Output(s) can be found in til folder.
 `python convert.py ./examples/til_post2.txt -s https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css`
 </br></br>
 
+
+### Specify config file
+`python convert.py  <file or folder path> -c <config toml file path>`
+#### Example
+`python convert.py ./examples -c config.toml`
+</br></br>
 ## License
 
 [License (MIT)](LICENSE.md)
