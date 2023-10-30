@@ -4,8 +4,9 @@ Command-line tool that converts input .txt files into .html files.
 
 ## Features
 
+- `v0.0.5` additionally parses front matter from .md files for metadata
 - `v0.0.4` additionally accepts TOML config file
-- `v0.0.3` parses code blocks and horizontal rules for .md files
+- `v0.0.3` additionally parses code blocks and horizontal rules for .md files
 - `v0.0.2` additionally converts .md files into .html and parses italic and bold for .md files
 - `v0.0.1` converts TIL post (.txt file) into .html file, specify output location, specify stylesheet url, view app version, view app help message
 
@@ -21,9 +22,10 @@ Command-line tool that converts input .txt files into .html files.
 
    `cd go-go-web`
 
-3. Install the tomlkit package
+3. Install packages
 
    `pip install tomlkit`
+   `pip install python-frontmatter`
    
 4. Check that you have the latest version of the app.
 
@@ -58,7 +60,6 @@ Output(s) can be found in til folder.
 
 `python convert.py <file or folder path> -o <folder path>`
 
-
 #### Example
 `python convert.py ./examples/examples.txt -o ./examples`
 </br></br>
@@ -71,14 +72,38 @@ Output(s) can be found in til folder.
 `python convert.py ./examples/til_post2.txt -s https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css`
 </br></br>
 
-
-### Specify config file
+### Specify Config File
 
 `python convert.py  <file or folder path> -c <config toml file path>`
 
 #### Example
 `python convert.py ./examples -c config.toml`
 </br></br>
+
+## Additional Features Available for Markdown
+
+Input file must be a .md file that is written in proper Markdown syntax
+
+### Front Matter Parsing
+
+You may specify the following front matter in Markdown files and these will become the metadata of the resulting HTML file
+
+| **Name**    | **Type** | **Default** | **Description**                                                                     |
+|-------------|----------|-------------|-------------------------------------------------------------------------------------|
+| description | string   | undefined   | The description of your document. Used for the page metadata and by search engines. |
+| keywords    | string[] | undefined   | Keywords meta tag for the document page, for search engines.                        |
+| lang        | string   | en          | The language of your document.                                                      |
+| title       | string   | file name   | The text title of your document. Used for the page metadata.                        |
+
+How to specify front matter in a Markdown file:
+
+```
+---
+title: Katie's Homepage
+keywords: website, coding
+description: This is Katie's personal website.
+---
+```
 
 ## License
 

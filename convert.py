@@ -5,6 +5,7 @@ import os
 import argparse
 import shutil
 from tomlkit.toml_file import TOMLFile
+import frontmatter
 
 def print_version():
     """Function prints app version."""
@@ -36,16 +37,20 @@ def load_config_file(config_file):
         print("Error loading or parsing the config file:", exception)
         sys.exit(1)
 
-def get_html_before_body(title, css_url):
+def get_html_before_body(filename, css_url, metadata):
     """Function returns the html of the page before and up to the <body>"""
     html = '<!doctype html>\n'
-    html += '<html lang="en">\n'
+    html += f'<html lang="{metadata["lang"] if "lang" in metadata else "en"}">\n'
     html += '<head>\n'
     html += '\t<meta charset="utf-8">\n'
-    html += '\t<title>{title}</title>\n'
-    html += '\t<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+    html += f'\t<title>{metadata["title"] if "title" in metadata else filename}</title>\n'
+    if 'keywords' in metadata:
+        html += f'\t<meta name="keywords" content="{metadata["keywords"]}" />\n'
+    if 'description' in metadata:
+        html += f'\t<meta name="description" content="{metadata["description"]}" />\n'
+    html += '\t<meta name="viewport" content="width=device-width, initial-scale=1" />\n'
     if css_url:
-        html += '\t<link rel="stylesheet" href="' + css_url + '">\n'
+        html += f'\t<link rel="stylesheet" href="{css_url}">\n'
     html += '</head>\n'
     html += '<body>\n'
     return html
@@ -83,8 +88,12 @@ def convert_to_html(path, output_folder, css_url):
 
 def markdown_to_html(path, file_name, output_folder, css_url):
     """Function converts a markdown file to html"""
-    title = os.path.basename(file_name)
-    output_fname = title + ".html"
+
+    # parse file and separate post frontmatter from post content
+    post = parse_frontmatter(path)
+
+    # output file name
+    output_fname = os.path.basename(file_name) + ".html"
 
     # use the input file name as the output file name
     output_fpath = output_folder + output_fname
@@ -92,13 +101,11 @@ def markdown_to_html(path, file_name, output_folder, css_url):
     # flag which signifies if text is inside a code block
     in_code_block = False
 
-    # open input and output files
-    with open(path, mode='r', encoding="utf-8") as input_file, open(output_fpath, mode='w', encoding="utf-8") as output_file:
+    with open(output_fpath, mode='w', encoding="utf-8") as output_file:
+        output_file.write(get_html_before_body(os.path.basename(file_name), css_url, post.metadata))
 
-        output_file.write(get_html_before_body(title, css_url))
-
-        # read each line in input file
-        for line in input_file:
+        # read each line in post content
+        for line in post.content.splitlines():
 
             # trim the line of whitespace and newline character
             line = line.strip()
@@ -137,6 +144,7 @@ def markdown_to_html(path, file_name, output_folder, css_url):
 
                 if num_found > 0:
                     in_code_block = False
+            
             if line:
                 # write the line to the output file
                 output_file.write(f'{line}\n')
@@ -150,9 +158,7 @@ def markdown_to_html(path, file_name, output_folder, css_url):
 
 def text_to_html(path, file_name, output_folder, css_url):
     """Function converts a txt file to html"""
-    # check if input file has a valid extension
-    title = os.path.basename(file_name)
-    output_fname = title + ".html"
+    output_fname = os.path.basename(file_name) + ".html"
 
     # use the input file name as the output file name
     output_fpath = output_folder + output_fname
@@ -160,7 +166,7 @@ def text_to_html(path, file_name, output_folder, css_url):
     # open input and output files
     with open(path, mode='r', encoding="utf-8") as input_file, open(output_fpath, mode='w', encoding="utf-8") as output_file:
 
-        output_file.write(get_html_before_body(title, css_url))
+        output_file.write(get_html_before_body(os.path.basename(file_name), css_url, {}))
 
         # read each line in input file
         for line in input_file:
@@ -206,6 +212,12 @@ def parse_cmdline():
         "output": str(args.output) if args.output else get_default_output_dir(),
         "stylesheet": args.stylesheet if args.stylesheet else ""
     }
+
+def parse_frontmatter(input_file_path):
+    """Function parses .md file to return object with frontmatter and content separated"""
+    with open(input_file_path, mode='r', encoding="utf-8") as input_file:
+        post = frontmatter.load(input_file)
+    return post
 
 # only triggered when we call this .py file and not during imports
 if __name__ == '__main__':
