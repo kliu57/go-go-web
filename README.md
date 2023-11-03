@@ -1,6 +1,6 @@
 # go-go-web
 
-Command-line tool that converts input .txt files into .html files.
+Command-line tool that converts .txt or .md files into .html files.
 
 ## Features
 
@@ -74,7 +74,7 @@ Output(s) can be found in til folder.
 
 ### Specify Config File
 
-`python convert.py  <file or folder path> -c <config toml file path>`
+`python convert.py <file or folder path> -c <config toml file path>`
 
 #### Example
 `python convert.py ./examples -c config.toml`
