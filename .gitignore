@@ -18,3 +18,14 @@ logs
 # pycache
 __pycache__
 
+# pytest cache
+.pytest_cache
+
+# venv
+.venv
+
+# vscode
+.vscode
+
+# coverage.py
+.coverage

@@ -1,4 +1,4 @@
-# pylint: disable=C0103,C0209
+# pylint: disable=invalid-name,consider-using-f-string
 
 """Module providing a command line tool to convert .txt or .md files to .html files."""
 # this file must be in the same directory as utils.py
@@ -22,19 +22,24 @@ def print_version():
 
 def remake_til_folder():
     """Function removes existing default output folder and recreates it"""
-    default_out = get_default_output_dir()
-    # delete default output folder
-    if os.path.exists(default_out):
-        try:
-            shutil.rmtree(default_out)
-            print(f"{ut.format_path_display(default_out)} folder deleted")
-        except OSError:
-            print(OSError)
-            sys.exit(1)
+    try:
+        default_out = get_default_output_dir()
+        # delete default output folder
+        if os.path.exists(default_out):
+            try:
+                shutil.rmtree(default_out)
+                print(f"{ut.format_path_display(default_out)} folder deleted")
+            except OSError as e:
+                print(e)
+                sys.exit(1)
 
-    # create default output folder
-    os.makedirs(default_out)
-    print(f"{ut.format_path_display(default_out)} folder created")
+        # create default output folder
+        os.makedirs(default_out)
+        print(f"{ut.format_path_display(default_out)} folder created")
+
+    except FileNotFoundError as exception:
+        print(exception)
+        sys.exit(1)
 
 
 def load_config_file(config_file):
@@ -43,8 +48,8 @@ def load_config_file(config_file):
         toml = TOMLFile(config_file)
         config_data_doc = toml.read()
         return config_data_doc
-    except (FileNotFoundError, UnexpectedCharError) as exception:
-        print("Error loading or parsing the config file:", exception)
+    except (FileNotFoundError, UnexpectedCharError) as e:
+        print("Error loading or parsing the config file: ", e)
         sys.exit(1)
 
 
@@ -251,8 +256,7 @@ def parse_frontmatter(input_file):
     return post
 
 
-# only triggered when we call this .py file and not during imports
-if __name__ == '__main__':
+def parse_args(arg_list=None):
     def formatter(prog):
         """Function parses command line arguments"""
         return argparse.HelpFormatter(prog, max_help_position=52)
@@ -267,49 +271,57 @@ if __name__ == '__main__':
     parser.add_argument("fname", nargs='?', type=pathlib.Path,
                         help="the input file or folder path")
     parser.add_argument("-c", "--config", type=str, help="specify config file")
-    args = parser.parse_args()
+
+    if arg_list:
+        return parser.parse_args(arg_list)
+    return parser.parse_args()
+
+
+def main(args):
+    """The main function for this module"""
 
     if args.version:
         print_version()
-    else:
-        if args.fname:
-            # get input file path from user input
-            input_file_path = str(args.fname)
+    elif args.fname:
+        # get input file path from user input
+        input_file_path = str(args.fname)
 
-            # get options from either config file or command line args
-            if args.config:
-                options = parse_config(args.config)
-            else:
-                options = parse_cmdline(args.output, args.stylesheet)
-
-            # remove and recreate default output folder
-            try:
-                remake_til_folder()
-            except FileNotFoundError:
-                print(
-                    f"{FileNotFoundError}\n_output_dir.py contains an invalid path")
-                sys.exit(1)
-
-            # check if the input file or folder path EXISTS
-            if os.path.isfile(input_file_path):
-                # convert file to html
-                convert_to_html(input_file_path,
-                                options["output"], options["stylesheet"])
-
-            elif os.path.isdir(input_file_path):
-                # get each item in the folder
-                for item in os.listdir(input_file_path):
-                    # get the file path
-                    file_path = os.path.join(input_file_path, item)
-
-                    # check if item is a file
-                    if os.path.isfile(file_path):
-                        # convert file to html
-                        convert_to_html(
-                            file_path, options["output"], options["stylesheet"])
-            else:
-                print(f"Error: File {input_file_path} does not exist")
-                sys.exit(1)
+        # get options from either config file or command line args
+        if args.config:
+            options = parse_config(args.config)
         else:
-            print("Error: no file or folder name specified")
+            options = parse_cmdline(args.output, args.stylesheet)
+
+        # remove and recreate default output folder
+        remake_til_folder()
+
+        # check if the input file or folder path EXISTS
+        if os.path.isfile(input_file_path):
+            # convert file to html
+            convert_to_html(input_file_path,
+                            options["output"], options["stylesheet"])
+
+        elif os.path.isdir(input_file_path):
+            # get each item in the folder
+            for item in os.listdir(input_file_path):
+                # get the file path
+                file_path = os.path.join(input_file_path, item)
+
+                # check if item is a file
+                if os.path.isfile(file_path):
+                    # convert file to html
+                    convert_to_html(
+                        file_path, options["output"], options["stylesheet"])
+        else:
+            print(f"Error: File {input_file_path} does not exist")
             sys.exit(1)
+    else:
+        print("Error: no file or folder name specified")
+        sys.exit(1)
+
+
+# only triggered when we call this .py file and not during imports
+if __name__ == '__main__':
+    # args = parser.parse_args(['examples/examples.txt'])
+    arguments = parse_args()
+    main(arguments)
