@@ -77,7 +77,7 @@ Output(s) can be found in til folder.
 `python src/convert.py <file or folder path> -c <config toml file path>`
 
 #### Example
-`python src/convert.py ./examples -c config.toml`
+`python src/convert.py ./examples -c src/config.toml`
 </br></br>
 
 ## Additional Features Available for Markdown
