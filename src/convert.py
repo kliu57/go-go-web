@@ -1,4 +1,4 @@
-# pylint: disable=C0103
+# pylint: disable=C0103,C0209
 
 """Module providing a command line tool to convert .txt or .md files to .html files."""
 # this file must be in the same directory as utils.py
@@ -110,7 +110,7 @@ def convert_to_html(path, output_folder, css_url):
     first_col_width = len(ut.format_path_display(
         ut.get_par_dir(in_file))) + 20
 
-    print(f"{0:{3}} {1} {2}".format(in_file, " ==> ", out_file, first_col_width))
+    print("{0:{3}} {1} {2}".format(in_file, " ==> ", out_file, first_col_width))
 
 
 def markdown_to_html(path, output_folder, css_url):
@@ -220,9 +220,11 @@ def text_to_html(path, output_folder, css_url):
 
         output_file.write(get_html_after_body())
 
+
 def get_default_output_dir():
     """Function returns default output directory"""
     return os.path.join(ut.get_root_dir(), "til")
+
 
 def parse_config(config_file):
     """Function parses config file to return options"""
