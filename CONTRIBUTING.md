@@ -18,10 +18,10 @@
 
 4. Install packages
 
-   `pip install tomlkit`
-   `pip install python-frontmatter`
-   `pip install pycodestyle`
-   `pip install --upgrade autopep8`
+   `pip install tomlkit` \
+   `pip install python-frontmatter` \
+   `pip install pycodestyle` \
+   `pip install --upgrade autopep8` \
    `pip install pylint`
 
 5. Make your code additions or changes.
