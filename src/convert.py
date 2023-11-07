@@ -1,6 +1,7 @@
 # pylint: disable=C0103
 
 """Module providing a command line tool to convert .txt or .md files to .html files."""
+# this file must be in the same directory as utils.py
 import pathlib
 import re
 import sys
@@ -10,28 +11,30 @@ import shutil
 from tomlkit.toml_file import TOMLFile
 from tomlkit.exceptions import UnexpectedCharError
 import frontmatter
+import utils as ut
 
 
 def print_version():
     """Function prints app version."""
-    with open("_version.py", "r", encoding="utf-8") as file:
+    with open(os.path.join(ut.get_root_dir(), "_version.py"), "r", encoding="utf-8") as file:
         print(f"go-go-web {file.read()}")
 
 
-def remake_til_folder(out):
-    """Function removes existing default output folder and recreates it."""
+def remake_til_folder():
+    """Function removes existing default output folder and recreates it"""
+    default_out = get_default_output_dir()
     # delete default output folder
-    if os.path.exists(out):
+    if os.path.exists(default_out):
         try:
-            shutil.rmtree(out)
-            print(f"{out} folder deleted")
+            shutil.rmtree(default_out)
+            print(f"{ut.format_path_display(default_out)} folder deleted")
         except OSError:
             print(OSError)
             sys.exit(1)
 
     # create default output folder
-    os.makedirs(out)
-    print(f"{out} folder created")
+    os.makedirs(default_out)
+    print(f"{ut.format_path_display(default_out)} folder created")
 
 
 def load_config_file(config_file):
@@ -73,9 +76,6 @@ def get_html_after_body():
 
 def convert_to_html(path, output_folder, css_url):
     """Function converts a file to html"""
-    # at slash at end of folder path if it is not there
-    if output_folder[-1] != "/":
-        output_folder += "/"
 
     # check if output folder is an existing folder
     if not os.path.isdir(output_folder):
@@ -83,41 +83,55 @@ def convert_to_html(path, output_folder, css_url):
             f"Error: output folder {output_folder} is not an existing folder")
         sys.exit(1)
 
-    # split the root and file ext
-    path_tup = os.path.splitext(path)
+    # get file name
+    file_name = os.path.basename(path)
 
-    # extract the file name and ext
-    file_name = path_tup[0]
-    file_ext = path_tup[1]
-    if file_ext == ".md":
-        markdown_to_html(path, file_name, output_folder, css_url)
-    elif file_ext == ".txt":
-        text_to_html(path, file_name, output_folder, css_url)
+    # split the root and file ext
+    path_tup = os.path.splitext(file_name)
+
+    # extract the name and ext
+    name = path_tup[0]
+    ext = path_tup[1]
+
+    if ext == ".md":
+        markdown_to_html(path, output_folder, css_url)
+    elif ext == ".txt":
+        text_to_html(path, output_folder, css_url)
     else:
         print(
-            f"Error: {path.replace(os.sep, '/')} was not converted. \
+            f"Error: {path} was not converted. \
                 File extension should be .md or .txt")
         sys.exit(1)
 
+    # print success message
+    in_file = ut.format_path_display(path)
+    out_file = ut.format_path_display(
+        os.path.join(output_folder, name + '.html'))
+    first_col_width = len(ut.format_path_display(
+        ut.get_par_dir(in_file))) + 20
 
-def markdown_to_html(path, file_name, output_folder, css_url):
+    print(f"{0:{3}} {1} {2}".format(in_file, " ==> ", out_file, first_col_width))
+
+
+def markdown_to_html(path, output_folder, css_url):
     """Function converts a markdown file to html"""
+
+    # extract file name
+    path_tup = os.path.splitext(os.path.basename(path))
+    name = path_tup[0]
 
     # parse file and separate post frontmatter from post content
     post = parse_frontmatter(path)
 
-    # output file name
-    output_fname = os.path.basename(file_name) + ".html"
-
     # use the input file name as the output file name
-    output_fpath = output_folder + output_fname
+    output_fname = name + ".html"
+    output_fpath = os.path.join(output_folder, output_fname)
 
     # flag which signifies if text is inside a code block
     in_code_block = False
 
     with open(output_fpath, mode='w', encoding="utf-8") as output_file:
-        output_file.write(get_html_before_body(
-            os.path.basename(file_name), css_url, post.metadata))
+        output_file.write(get_html_before_body(name, css_url, post.metadata))
 
         # read each line in post content
         for line in post.content.splitlines():
@@ -170,22 +184,23 @@ def markdown_to_html(path, file_name, output_folder, css_url):
 
         output_file.write(get_html_after_body())
 
-    print(f"{path.replace(os.sep, '/')} converted to {output_fpath} successfully!")
 
-
-def text_to_html(path, file_name, output_folder, css_url):
+def text_to_html(path, output_folder, css_url):
     """Function converts a txt file to html"""
-    output_fname = os.path.basename(file_name) + ".html"
+
+    # extract file name
+    path_tup = os.path.splitext(os.path.basename(path))
+    name = path_tup[0]
 
     # use the input file name as the output file name
-    output_fpath = output_folder + output_fname
+    output_fname = name + ".html"
+    output_fpath = os.path.join(output_folder, output_fname)
 
     # open input and output files
     with open(path, mode='r', encoding="utf-8") as input_file, \
             open(output_fpath, mode='w', encoding="utf-8") as output_file:
 
-        output_file.write(get_html_before_body(
-            os.path.basename(file_name), css_url, {}))
+        output_file.write(get_html_before_body(name, css_url, {}))
 
         # read each line in input file
         for line in input_file:
@@ -205,18 +220,9 @@ def text_to_html(path, file_name, output_folder, css_url):
 
         output_file.write(get_html_after_body())
 
-    print(f"{path.replace(os.sep, '/')} converted to {output_fpath} successfully!")
-
-
 def get_default_output_dir():
-    """Function returns default output dir specified in _output_dir.py"""
-    try:
-        with open("_output_dir.py", "r", encoding="utf-8") as file:
-            return file.read()
-    except FileNotFoundError:
-        print(FileNotFoundError)
-        sys.exit(1)
-
+    """Function returns default output directory"""
+    return os.path.join(ut.get_root_dir(), "til")
 
 def parse_config(config_file):
     """Function parses config file to return options"""
@@ -276,17 +282,18 @@ if __name__ == '__main__':
 
             # remove and recreate default output folder
             try:
-                remake_til_folder(options["output"])
+                remake_til_folder()
             except FileNotFoundError:
                 print(
                     f"{FileNotFoundError}\n_output_dir.py contains an invalid path")
-                sys.exit()
+                sys.exit(1)
 
             # check if the input file or folder path EXISTS
             if os.path.isfile(input_file_path):
                 # convert file to html
                 convert_to_html(input_file_path,
                                 options["output"], options["stylesheet"])
+
             elif os.path.isdir(input_file_path):
                 # get each item in the folder
                 for item in os.listdir(input_file_path):
@@ -299,10 +306,8 @@ if __name__ == '__main__':
                         convert_to_html(
                             file_path, options["output"], options["stylesheet"])
             else:
-                print(f"Error: File {input_file_path} does not exist\n")
-                parser.print_help()
+                print(f"Error: File {input_file_path} does not exist")
                 sys.exit(1)
         else:
             print("Error: no file or folder name specified")
-            parser.print_help()
             sys.exit(1)

@@ -29,55 +29,55 @@ Command-line tool that converts .txt or .md files into .html files.
    
 4. Check that you have the latest version of the app.
 
-   `python convert.py --version`
+   `python src/convert.py --version`
 
 ## Usage
 
 ### View App Version
 
-`python convert.py --version` or `python convert.py -v`
+`python src/convert.py --version` or `python src/convert.py -v`
 </br></br>
 
 ### View Usage Message
 
-`python convert.py --help` or `python convert.py -h`
+`python src/convert.py --help` or `python src/convert.py -h`
 </br></br>
 
 ### Convert .txt to .html
 
-`python convert.py <file or folder path>`
+`python src/convert.py <file or folder path>`
 
 #### Example 1 (Convert one file)
-`python convert.py ./examples/til_post1.txt`
+`python src/convert.py ./examples/til_post1.txt`
 
 #### Example 2 (Convert a folder of files)
-`python convert.py ./examples`
+`python src/convert.py ./examples`
 
 Output(s) can be found in til folder.
 </br></br>
 
 ### Specify Output Location
 
-`python convert.py <file or folder path> -o <folder path>`
+`python src/convert.py <file or folder path> -o <folder path>`
 
 #### Example
-`python convert.py ./examples/examples.txt -o ./examples`
+`python src/convert.py ./examples/examples.txt -o ./examples`
 </br></br>
 
 ### Specify Stylesheet
 
-`python convert.py <file or folder path> -s <stylesheet url>`
+`python src/convert.py <file or folder path> -s <stylesheet url>`
 
 #### Example
-`python convert.py ./examples/til_post2.txt -s https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css`
+`python src/convert.py ./examples/til_post2.txt -s https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css`
 </br></br>
 
 ### Specify Config File
 
-`python convert.py <file or folder path> -c <config toml file path>`
+`python src/convert.py <file or folder path> -c <config toml file path>`
 
 #### Example
-`python convert.py ./examples -c config.toml`
+`python src/convert.py ./examples -c config.toml`
 </br></br>
 
 ## Additional Features Available for Markdown

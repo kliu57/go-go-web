@@ -28,7 +28,7 @@
 
 6. Prior to committing your changes to your branch, run autopep8 to format the code.
 
-   `python -m autopep8 --in-place --recursive --exclude="*.md,_version.py,_output_dir.py" .`
+   `python -m autopep8 --in-place --recursive --exclude="*.md,_version.py" .`
 
    Alternatively, install the autopep8 VS Code extension, and then run it on a file by:
 
@@ -36,7 +36,7 @@
 
 7. Run Pylint to evaluate the code. Please ensure the evaluation rating is at or above 9.0/10.
 
-   `python -m pylint ./*.py --ignore-patterns="_version.py,_output_dir.py"`
+   `python -m pylint src/*.py`
 
    If you use VS Code, you can install the Pylint VSCode extension, and linting will automatically run when a Python file is opened. Read [here](https://code.visualstudio.com/docs/python/linting#_run-linting) for more details. This can help with identifying and locating issues, but you must run the above command line code to reveal the evaluation score.
 
