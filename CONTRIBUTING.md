@@ -16,14 +16,7 @@
 
 3. Once you have been assigned, follow [these steps](https://docs.github.com/en/get-started/quickstart/contributing-to-projects) for forking and cloning the repo and creating a branch.
 
-4. Install virtual environment. Open a VS Code terminal and make sure you are in the go-go-web folder.
-
-   `python -m venv .venv`
-
-   Click Yes when prompted with the VS Code popup "We noticed a new environment has been created. Do you want to select it for the workspace folder?" \
-   If you don't see this, `CTRL+SHIFT+P` and search for "Python: Select Interpreter" and select the venv we created.
-
-5. Open a brand new VS Code terminal. You should now be inside the venv. Install packages.
+4. Install packages.
 
    ```
    pip install tomlkit
@@ -35,9 +28,9 @@
    pip install coverage
    ```
 
-6. Make your code additions or changes.
+5. Make your code additions or changes.
 
-7. Run unit tests and make sure they all pass.
+6. Run unit tests and make sure they all pass.
 
    `pytest`
 
@@ -45,7 +38,7 @@
 
    `pytest tests/<unit test file>.py`
 
-8. Run autopep8 to format the code.
+7. Run autopep8 to format the code.
 
    `autopep8 --in-place --recursive --exclude="*.md,_version.py" .`
 
@@ -55,7 +48,7 @@
 
    If running into issues, try adding `python -m` in front of the command.
 
-9. Run Pylint to evaluate the code. Please ensure the evaluation rating is at or above 9.0/10.
+8. Run Pylint to evaluate the code. Please ensure the evaluation rating is at or above 9.0/10.
 
    `pylint src/ tests/ conftest.py`
 
@@ -63,7 +56,7 @@
 
    If you use VS Code, you can install the Pylint VSCode extension, and linting will automatically run when a Python file is opened. Read [here](https://code.visualstudio.com/docs/python/linting#_run-linting) for more details. This can help with identifying and locating issues, but you must run the above command line code to reveal the evaluation score.
 
-10. Commit your changes to your branch and submit a pull request. See [steps in this guide](https://docs.github.com/en/get-started/quickstart/contributing-to-projects). In the pull request description, please link it to the issue by writing Closes #11, where 11 is replaced with your issue number. Please also include screenshots to show results of testing.
+9. Commit your changes to your branch and submit a pull request. See [steps in this guide](https://docs.github.com/en/get-started/quickstart/contributing-to-projects). In the pull request description, please link it to the issue by writing Closes #11, where 11 is replaced with your issue number. Please also include screenshots to show results of testing.
 
 ## Contributing - Writing Unit Tests
 
