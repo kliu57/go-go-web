@@ -91,7 +91,7 @@ def pytest_configure():
         '\t<meta name="viewport" content="width=device-width, initial-scale=1" />\n' \
         '</head>\n' \
         '<body>\n' \
-        '<p>wrong content</p>\n' \
+        '<p>content</p>\n' \
         '</body>\n' \
         '</html>'
 
