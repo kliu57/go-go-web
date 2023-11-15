@@ -24,11 +24,22 @@ class Helpers:
 # Global variables
 def pytest_configure():
     """Defines pytest global variables"""
+
     pytest.simple_txt_contents = 'Hello\n'
+
     pytest.simple_md_contents = 'Hello\n' \
         '---\n' \
         '**Bold**\n' \
         '*Italics*\n'
+    
+    pytest.frontmatter_md_contents = '---\n' \
+        'title: My First Blog\n' \
+        'lang: en\n' \
+        'description: This is my first ever blog about programming.\n' \
+        'keywords: website, coding\n' \
+        '---\n' \
+        '\n' \
+        'content\n'
 
     pytest.simple_html_from_txt = '<!doctype html>\n' \
         '<html lang="en">\n' \
@@ -67,6 +78,20 @@ def pytest_configure():
         '<p><hr /></p>\n' \
         '<p><strong>Bold</strong></p>\n' \
         '<p>*Italics*</p>\n' \
+        '</body>\n' \
+        '</html>'
+    
+    pytest.html_from_frontmatter_md = '<!doctype html>\n' \
+        '<html lang="en">\n' \
+        '<head>\n' \
+        '\t<meta charset="utf-8">\n' \
+        '\t<title>My First Blog</title>\n' \
+        '\t<meta name="keywords" content="website, coding" />\n' \
+        '\t<meta name="description" content="This is my first ever blog about programming." />\n' \
+        '\t<meta name="viewport" content="width=device-width, initial-scale=1" />\n' \
+        '</head>\n' \
+        '<body>\n' \
+        '<p>content</p>\n' \
         '</body>\n' \
         '</html>'
 

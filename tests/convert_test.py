@@ -82,3 +82,16 @@ def test_main_config(tmpdir, helpers):
     output_path = tmpdir.join('test.html')
     assert helpers.file_contents(
         output_path) == pytest.simple_html_with_stylesheet
+
+
+def test_main_md_frontmatter(tmpdir, helpers):
+    """Tests convert.py main function with md file which has front matter"""
+    # Pass command line arguments to main() to mimic the following command line program call:
+    # python src/convert -o <tmp_output_dir> <tmp_input_md_file>
+    arguments = c.parse_args(
+        ["-o", str(tmpdir), helpers.new_file(tmpdir, "frontmatter.md", pytest.frontmatter_md_contents)])
+    # Run main function
+    c.main(arguments)
+    # Compare actual output file contents to expected
+    output_path = tmpdir.join('frontmatter.html')
+    assert helpers.file_contents(output_path) == pytest.html_from_frontmatter_md
