@@ -68,7 +68,7 @@
 ## Contributing - Writing Unit Tests
 
  - Create unit test files in tests/
- - Naming convention: <source file name>_test.py
+ - Naming convention: `<source file name>_test.py`
  - Refactor test code by establishing global variables, global fixtures, helper functions in `conftest.py`
  - Run autopep8 and Pylint on test code prior to commit
  - Please remove print statements from tests prior to commit
