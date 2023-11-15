@@ -79,4 +79,4 @@
  - Run with detailed view: `pytest -vv`
  - Run one specific test file: `pytest tests/<test file>.py`
  - Run while showing print statements in tests: `pytest -s`
- - Check code coverage (optional): `coverage run -m pytest`
+ - Check code coverage (optional): `coverage report -m`

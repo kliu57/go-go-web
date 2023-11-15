@@ -1,0 +1,28 @@
+# .github/workflows/ci.yml
+
+# Continuous Integration (CI) Workflow
+name: Run Unit Test via Pytest  
+
+# This workflow will run unit tests whenever we push commits to the `main`
+# branch, or whenever there's a pull request to the `main` branch
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.12"
+    - name: Test with pytest
+      run: |
+        pytest

@@ -56,14 +56,18 @@ def load_config_file(config_file):
 def get_html_before_body(filename, css_url, metadata):
     """Function returns the html of the page before and up to the <body>"""
     html = '<!doctype html>\n'
-    html += f'<html lang="{metadata["lang"] if "lang" in metadata else "en"}">\n'
+    html += f'<html lang="{metadata["lang"]
+                           if "lang" in metadata else "en"}">\n'
     html += '<head>\n'
     html += '\t<meta charset="utf-8">\n'
-    html += f'\t<title>{metadata["title"] if "title" in metadata else filename}</title>\n'
+    html += f'\t<title>{metadata["title"]
+                        if "title" in metadata else filename}</title>\n'
     if 'keywords' in metadata:
-        html += f'\t<meta name="keywords" content="{metadata["keywords"]}" />\n'
+        html += f'\t<meta name="keywords" content="{
+            metadata["keywords"]}" />\n'
     if 'description' in metadata:
-        html += f'\t<meta name="description" content="{metadata["description"]}" />\n'
+        html += f'\t<meta name="description" content="{
+            metadata["description"]}" />\n'
     html += '\t<meta name="viewport" content="width=device-width, initial-scale=1" />\n'
     if css_url:
         html += f'\t<link rel="stylesheet" href="{css_url}">\n'
