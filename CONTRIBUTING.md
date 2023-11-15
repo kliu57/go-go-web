@@ -19,6 +19,7 @@
 4. Install packages.
 
    ```
+   python -m pip install --upgrade pip
    pip install tomlkit
    pip install python-frontmatter
    pip install pycodestyle
