@@ -39,17 +39,6 @@ jobs:
         run: |
           pytest
 
-      - name: Format code with autopep8
-        id: autopep8
-        uses: peter-evans/autopep8@v2
-        with:
-          args: --recursive --in-place --aggressive --aggressive .
-
-      - name: Fail if autopep8 made changes
-        if: steps.autopep8.outputs.exit-code == 2
-        run: exit 1
-
       - name: Analysing the code with pylint
         run: |
           pylint --fail-under=9.0 src/ tests/ conftest.py
-

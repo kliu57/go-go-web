@@ -39,7 +39,17 @@
 
    `pytest tests/<unit test file>.py`
 
-7. Run Pylint to evaluate the code. Please ensure the evaluation rating is at or above 9.0/10.
+7. Run autopep8 to format the code.
+
+   `autopep8 --in-place --recursive --exclude=_version.py .`
+
+   Alternatively, install the autopep8 VS Code extension, and then run it on a file by:
+
+   `Right Click File Contents > Format Document With... > autopep8`
+
+   If running into issues, try adding `python -m` in front of the command.
+
+8. Run Pylint to evaluate the code. Please ensure the evaluation rating is at or above 9.0/10.
 
    `pylint --ignore=_version.py $(git ls-files '*.py')`
 
@@ -47,7 +57,7 @@
 
    If you use VS Code, you can install the Pylint VSCode extension, and linting will automatically run when a Python file is opened. Read [here](https://code.visualstudio.com/docs/python/linting#_run-linting) for more details. This can help with identifying and locating issues, but you must run the above command line code to reveal the evaluation score.
 
-8. Commit your changes to your branch and submit a pull request. See [steps in this guide](https://docs.github.com/en/get-started/quickstart/contributing-to-projects). In the pull request description, please link it to the issue by writing Closes #11, where 11 is replaced with your issue number. Please also include screenshots to show results of testing.
+9. Commit your changes to your branch and submit a pull request. See [steps in this guide](https://docs.github.com/en/get-started/quickstart/contributing-to-projects). In the pull request description, please link it to the issue by writing Closes #11, where 11 is replaced with your issue number. Please also include screenshots to show results of testing.
 
 ## Contributing - Writing Unit Tests
 

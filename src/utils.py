@@ -1,6 +1,7 @@
 """Module providing general utility functions."""
 import os
 
+
 def format_path_display(path):
     """Format path for display"""
     # If path is a child path of CWD, format path to relative path
