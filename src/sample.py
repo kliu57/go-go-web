@@ -5,5 +5,5 @@ myvar2= 5
 
 def a():
     var3 = myvar2
-    
+
     return 0
