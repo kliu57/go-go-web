@@ -37,7 +37,7 @@ jobs:
 
       - name: Format the code with autopep8
         run: |
-          autopep8 --in-place --recursive --exclude="*.md,_version.py" .
+          autopep8 --in-place --recursive --exclude="_version.py" .
 
       - name: Analysing the code with pylint
         run: |
