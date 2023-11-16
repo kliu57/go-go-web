@@ -50,7 +50,7 @@
 
 8. Run Pylint to evaluate the code. Please ensure the evaluation rating is at or above 9.0/10.
 
-   `pylint src/ tests/ conftest.py`
+   `pylint --ignore=_version.py $(git ls-files '*.py')`
 
    If running into issues, try adding `python -m` in front of the command.
 
