@@ -31,7 +31,7 @@ def pytest_configure():
         '---\n' \
         '**Bold**\n' \
         '*Italics*\n'
-    
+
     pytest.frontmatter_md_contents = '---\n' \
         'title: My First Blog\n' \
         'lang: en\n' \
@@ -80,7 +80,7 @@ def pytest_configure():
         '<p>*Italics*</p>\n' \
         '</body>\n' \
         '</html>'
-    
+
     pytest.html_from_frontmatter_md = '<!doctype html>\n' \
         '<html lang="en">\n' \
         '<head>\n' \

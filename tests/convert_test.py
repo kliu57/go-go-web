@@ -94,4 +94,5 @@ def test_main_md_frontmatter(tmpdir, helpers):
     c.main(arguments)
     # Compare actual output file contents to expected
     output_path = tmpdir.join('frontmatter.html')
-    assert helpers.file_contents(output_path) == pytest.html_from_frontmatter_md
+    assert helpers.file_contents(
+        output_path) == pytest.html_from_frontmatter_md

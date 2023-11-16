@@ -35,10 +35,15 @@ jobs:
           pip install pytest
           pip install coverage
 
-      - name: Test with pytest
+      - name: Format the code with autopep8
         run: |
-          pytest
+          autopep8 --in-place --recursive --exclude="*.md,_version.py" .
 
       - name: Analysing the code with pylint
         run: |
           pylint --ignore=_version.py $(git ls-files '*.py')
+
+      - name: Test with pytest
+        run: |
+          pytest
+
