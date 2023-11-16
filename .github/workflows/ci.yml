@@ -35,15 +35,20 @@ jobs:
           pip install pytest
           pip install coverage
 
+      - name: Test with pytest
+        run: |
+          pytest
+
       - name: Format the code with autopep8
+        id: autopep8
         run: |
           autopep8 --in-place --recursive --exclude=_version.py .
+
+      - name: Fail if autopep8 made changes
+        if: steps.autopep8.outputs.exit-code == 2
+        run: exit 1
 
       - name: Analysing the code with pylint
         run: |
           pylint --fail-under=9.0 src/ tests/ conftest.py
-
-      - name: Test with pytest
-        run: |
-          pytest
 
