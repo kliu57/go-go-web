@@ -1,9 +1,11 @@
+# pylint: disable=line-too-long
 """Module contains fixtures, helper functions, global variables for pytest"""
 import os
 import pytest
 
 
 class Helpers:
+    """Defines helper functions"""
     @staticmethod
     def new_file(directory, file_name, file_contents):
         """Creates new file and returns the path"""
@@ -118,4 +120,5 @@ def cleanup_output(request):
 
 @pytest.fixture
 def helpers():
+    """Returns helper class"""
     return Helpers

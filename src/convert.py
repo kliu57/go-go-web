@@ -1,5 +1,4 @@
-# pylint: disable=invalid-name,consider-using-f-string
-
+# pylint: disable=consider-using-f-string
 """Module providing a command line tool to convert .txt or .md files to .html files."""
 # this file must be in the same directory as utils.py
 import pathlib
@@ -56,14 +55,18 @@ def load_config_file(config_file):
 def get_html_before_body(filename, css_url, metadata):
     """Function returns the html of the page before and up to the <body>"""
     html = '<!doctype html>\n'
-    html += f'<html lang="{metadata["lang"] if "lang" in metadata else "en"}">\n'
+    html += f'<html lang="{metadata["lang"]
+                           if "lang" in metadata else "en"}">\n'
     html += '<head>\n'
     html += '\t<meta charset="utf-8">\n'
-    html += f'\t<title>{metadata["title"] if "title" in metadata else filename}</title>\n'
+    html += f'\t<title>{metadata["title"]
+                        if "title" in metadata else filename}</title>\n'
     if 'keywords' in metadata:
-        html += f'\t<meta name="keywords" content="{metadata["keywords"]}" />\n'
+        html += f'\t<meta name="keywords" content="{
+            metadata["keywords"]}" />\n'
     if 'description' in metadata:
-        html += f'\t<meta name="description" content="{metadata["description"]}" />\n'
+        html += f'\t<meta name="description" content="{
+            metadata["description"]}" />\n'
     html += '\t<meta name="viewport" content="width=device-width, initial-scale=1" />\n'
     if css_url:
         html += f'\t<link rel="stylesheet" href="{css_url}">\n'
@@ -149,9 +152,8 @@ def markdown_to_html(path, output_folder, css_url):
                 # Look for beginning of code block (```)
                 result_tup = re.subn(r'^[ ]*```.*$', r'<pre>', line)
                 line = result_tup[0]
-                num_found = result_tup[1]
 
-                if num_found > 0:
+                if result_tup[1] > 0:
                     in_code_block = True
                 else:
                     # Replace *italic* and _italic_ with <em>italic</em>
@@ -175,9 +177,8 @@ def markdown_to_html(path, output_folder, css_url):
                 # Look for end of code block (```)
                 result_tup = re.subn(r'^[ ]*```[`]*[ ]*$', r'</pre>', line)
                 line = result_tup[0]
-                num_found = result_tup[1]
 
-                if num_found > 0:
+                if result_tup[1] > 0:
                     in_code_block = False
 
             if line:
@@ -211,14 +212,12 @@ def text_to_html(path, output_folder, css_url):
         for line in input_file:
 
             # trim the line of whitespace and newline character
-            line = line.strip()
-
-            if line:
+            if line.strip():
                 # wrap line in paragraph tag
-                line = "<p>" + line + "</p>"
+                line = "<p>" + line.strip() + "</p>"
 
                 # write the line to the output file
-                output_file.write(f'{line}\n')
+                output_file.write(f'{line.strip()}\n')
             else:
                 # write an empty line to the output file
                 output_file.write('\n')
@@ -257,6 +256,7 @@ def parse_frontmatter(input_file):
 
 
 def parse_args(arg_list=None):
+    """Function returns an argparse.Namespace object"""
     def formatter(prog):
         """Function parses command line arguments"""
         return argparse.HelpFormatter(prog, max_help_position=52)

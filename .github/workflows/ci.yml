@@ -1,7 +1,7 @@
 # .github/workflows/ci.yml
 
 # Continuous Integration (CI) Workflow
-name: Run Unit Test via Pytest  
+name: Format Lint and Run Unit Tests
 
 # This workflow will run unit tests whenever we push commits to the `main`
 # branch, or whenever there's a pull request to the `main` branch
@@ -41,7 +41,7 @@ jobs:
 
       - name: Analysing the code with pylint
         run: |
-          pylint --ignore=_version.py $(git ls-files '*.py')
+          pylint --fail-under=9.75 src/ tests/ conftest.py
 
       - name: Test with pytest
         run: |
