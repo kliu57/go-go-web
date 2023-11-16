@@ -41,11 +41,7 @@
 
 7. Run autopep8 to format the code.
 
-   `autopep8 --in-place --recursive --exclude=_version.py .`
-
-   Alternatively, install the autopep8 VS Code extension, and then run it on a file by:
-
-   `Right Click File Contents > Format Document With... > autopep8`
+   `autopep8 --in-place --recursive --exclude='_version.py' --ignore=E501 .`
 
    If running into issues, try adding `python -m` in front of the command.
 
