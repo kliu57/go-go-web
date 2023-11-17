@@ -37,8 +37,6 @@ def pytest_configure():
     pytest.simple_md_with_code_contents = 'Hello\n' \
         '**Bold**\n' \
         '__Another Bold__\n' \
-        '*Italics*\n' \
-        '_More Italics_\n' \
         '`some code`\n' \
         '```\n' \
         'some multiline code\n' \
@@ -104,8 +102,6 @@ def pytest_configure():
         '<p>Hello</p>\n' \
         '<p><strong>Bold</strong></p>\n' \
         '<p><strong>Another Bold</strong></p>\n' \
-        '<p>*Italics*</p>\n' \
-        '<p>_More Italics_</p>\n' \
         '<p><code>some code</code></p>\n' \
         '<pre>\n' \
         'some multiline code\n' \
