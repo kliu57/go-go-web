@@ -107,12 +107,9 @@ def test_main_md_frontmatter(tmpdir, helpers):
 
 def test_markdown_to_html(tmpdir, helpers):
     """Tests convert.py markdown_to_html function for bolding, code blocks and fenced codeblocks"""
-    # Pass command line arguments to main() to mimic following command line program call:
-    # python src/convert -o <tmp_output_dir> <tmp_input_file>
-    arguments = c.parse_args(
-        ["-o", str(tmpdir), helpers.new_file(tmpdir, "markdownWithCode.md", pytest.simple_md_with_code_contents)])
-    # Run main function
-    c.main(arguments)
+    # Run markdown_to_html function
+    c.markdown_to_html(helpers.new_file(tmpdir, "markdownWithCode.md", pytest.simple_md_with_code_contents),tmpdir, '')
+
     # Compare actual output file content to expected
     output_path = tmpdir.join('markdownWithCode.html')
     assert helpers.file_contents(output_path) == pytest.simple_html_with_code_from_md
