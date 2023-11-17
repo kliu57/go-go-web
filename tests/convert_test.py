@@ -106,7 +106,7 @@ def test_main_md_frontmatter(tmpdir, helpers):
 
 
 def test_markdown_to_html(tmpdir, helpers):
-    """Tests convert.py markdown_to_html function for bolding, italics, code blocks and fenced codeblocks"""
+    """Tests convert.py markdown_to_html function for bolding, code blocks and fenced codeblocks"""
     # Pass command line arguments to main() to mimic following command line program call:
     # python src/convert -o <tmp_output_dir> <tmp_input_file>
     arguments = c.parse_args(
