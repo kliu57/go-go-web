@@ -91,6 +91,24 @@ def pytest_configure():
         '</body>\n' \
         '</html>'
 
+    pytest.simple_html_with_code_from_md = '<!doctype html>\n' \
+        '<html lang="en">\n' \
+        '<head>\n' \
+        '\t<meta charset="utf-8">\n' \
+        '\t<title>markdown</title>\n' \
+        '\t<meta name="viewport" content="width=device-width, initial-scale=1" />\n' \
+        '</head>\n' \
+        '<body>\n' \
+        '<p>Hello><p>\n' \
+        '<p><strong>Bold</strong></p>\n' \
+        '<p><strong>Another Bold</strong></p>\n' \
+        '<p><em>Italics</em></p>\n' \
+        '<p><em>More Italics</em></p>\n' \
+        '<p><code>some code</code></p>\n' \
+        '<p><pre>some multiline code</pre></p>\n' \
+        '</body>\n' \
+        '</html>'
+
     pytest.html_from_frontmatter_md = '<!doctype html>\n' \
         '<html lang="en">\n' \
         '<head>\n' \
