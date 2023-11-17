@@ -108,7 +108,10 @@ def test_main_md_frontmatter(tmpdir, helpers):
 def test_markdown_to_html(tmpdir, helpers):
     """Tests convert.py markdown_to_html function for bolding, code blocks and fenced codeblocks"""
     # Run markdown_to_html function
-    c.markdown_to_html(helpers.new_file(tmpdir, "markdownWithCode.md", pytest.simple_md_with_code_contents), tmpdir, '')
+    c.markdown_to_html(helpers.new_file(
+        tmpdir,
+        "markdownWithCode.md",
+        pytest.simple_md_with_code_contents), tmpdir, '')
 
     # Compare actual output file content to expected
     output_path = tmpdir.join('markdownWithCode.html')
