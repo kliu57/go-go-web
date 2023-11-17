@@ -40,7 +40,9 @@ def pytest_configure():
         '*Italics*\n' \
         '_More Italics_\n' \
         '`some code`\n' \
-        '```some multiline code```\n'
+        '```\n' \
+        'some multiline code\n' \
+        '```\n'
 
     pytest.frontmatter_md_contents = '---\n' \
         'title: My First Blog\n' \
@@ -95,17 +97,19 @@ def pytest_configure():
         '<html lang="en">\n' \
         '<head>\n' \
         '\t<meta charset="utf-8">\n' \
-        '\t<title>markdown</title>\n' \
+        '\t<title>markdownWithCode</title>\n' \
         '\t<meta name="viewport" content="width=device-width, initial-scale=1" />\n' \
         '</head>\n' \
         '<body>\n' \
-        '<p>Hello><p>\n' \
+        '<p>Hello</p>\n' \
         '<p><strong>Bold</strong></p>\n' \
         '<p><strong>Another Bold</strong></p>\n' \
-        '<p><em>Italics</em></p>\n' \
-        '<p><em>More Italics</em></p>\n' \
+        '<p>*Italics*</p>\n' \
+        '<p>_More Italics_</p>\n' \
         '<p><code>some code</code></p>\n' \
-        '<p><pre>some multiline code</pre></p>\n' \
+        '<pre>\n' \
+        'some multiline code\n' \
+        '</pre>\n' \
         '</body>\n' \
         '</html>'
 
