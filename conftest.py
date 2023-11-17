@@ -34,6 +34,14 @@ def pytest_configure():
         '**Bold**\n' \
         '*Italics*\n'
 
+    pytest.simple_md_with_code_contents = 'Hello\n' \
+        '**Bold**\n' \
+        '__Another Bold__\n' \
+        '*Italics*\n' \
+        '_More Italics_\n' \
+        '`some code`\n' \
+        '```some multiline code```\n'
+
     pytest.frontmatter_md_contents = '---\n' \
         'title: My First Blog\n' \
         'lang: en\n' \
