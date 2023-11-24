@@ -4,7 +4,7 @@ import pytest
 from src.gogoweb import convert as c
 
 
-@pytest.mark.parametrize('cleanup_output', [['src/gogoweb/til/test.html']], indirect=True)
+@pytest.mark.parametrize('cleanup_output', [['til/test.html']], indirect=True)
 @pytest.mark.usefixtures('cleanup_output')
 def test_main_default_output(tmpdir, helpers):
     """Tests convert.py main function with output to default location"""
@@ -15,7 +15,7 @@ def test_main_default_output(tmpdir, helpers):
     # Run main function
     c.main(arguments)
     # Compare actual output file contents to expected
-    assert helpers.file_contents('src/gogoweb/til/test.html') == pytest.simple_html_from_txt
+    assert helpers.file_contents('til/test.html') == pytest.simple_html_from_txt
 
 
 def test_main_custom_output(tmpdir, helpers):
