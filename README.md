@@ -4,7 +4,7 @@ Command-line tool that converts .txt or .md files into .html files.
 
 ## Features
 
-- `v1.0.0` project package uploaded to [Test PyPI](https://test.pypi.org/project/gogoweb/)
+- `v1.0.2` project package uploaded to [Test PyPI](https://pypi.org/project/gogoweb/)
 - `v0.0.5` additionally parses front matter from .md files for metadata
 - `v0.0.4` additionally accepts TOML config file
 - `v0.0.3` additionally parses code blocks and horizontal rules for .md files
@@ -41,28 +41,9 @@ Command-line tool that converts .txt or .md files into .html files.
    python3 -m pip install gogoweb
    ```
 
-4. Check the location of the installed files.
+4. Check that you have the latest version of the app.
 
-   Windows
-   ```
-   pip show gogoweb
-   ```
-
-   Linux/MAC OS
-   ```
-   python3 -m pip show gogoweb
-   ```
-
-5. Append `\gogoweb` to the location path shown. Navigate to that location using `cd`, or simply go to that location in file explorer and open a terminal there.
-
-   ```
-   # this path will be different for each user depending on the result you get from Step 4
-   cd C:\Users\<your user>\AppData\Local\Programs\Python\Python312\Lib\site-packages\gogoweb
-   ```
-
-6. Check that you have the latest version of the app.
-
-   `py convert.py -v`
+   `py -m gogoweb.convert -v`
 
 ## Usage
 

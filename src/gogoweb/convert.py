@@ -10,7 +10,7 @@ import shutil
 from tomlkit.toml_file import TOMLFile
 from tomlkit.exceptions import UnexpectedCharError
 import frontmatter
-import utils as ut
+from . import utils as ut
 
 
 def print_version():
@@ -223,7 +223,7 @@ def text_to_html(path, output_folder, css_url):
 
 def get_default_output_dir():
     """Function returns default output directory"""
-    return os.path.join(ut.get_root_dir(), "til")
+    return os.path.join(os.getcwd(), "til")
 
 
 def parse_config(config_file):

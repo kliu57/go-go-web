@@ -29,3 +29,7 @@ __pycache__
 
 # coverage.py
 .coverage
+
+# PyPI package
+dist
+gogoweb.egg-info
