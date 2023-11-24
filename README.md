@@ -15,7 +15,15 @@ Command-line tool that converts .txt or .md files into .html files.
 
 1. Download and install the latest version of [python](https://www.python.org/downloads/). Open a terminal and check that it is installed.
 
-   `py --version`
+   Windows
+   ```
+   py --version
+   ```
+
+   Linux/MAC OS
+   ```
+   python3 --version
+   ```
 
 2. Make sure you have upgraded version of pip.
 
@@ -43,23 +51,57 @@ Command-line tool that converts .txt or .md files into .html files.
 
 4. Check that you have the latest version of the app.
 
-   `py -m gogoweb.convert -v`
+   Windows
+   ```
+   py -m gogoweb.convert -v
+   ```
+
+   Linux/MAC OS
+   ```
+   python3 -m gogoweb.convert -v
+   ```
 
 ## Usage
 
 ### View App Version
 
-`py -m gogoweb.convert --version` or `py -m gogoweb.convert -v`
-</br></br>
+   Windows
+   ```
+   py -m gogoweb.convert --version
+   py -m gogoweb.convert -v
+   ```
+
+   Linux/MAC OS
+   ```
+   python3 -m gogoweb.convert -version
+   python3 -m gogoweb.convert -v
+   ```
 
 ### View Usage Message
 
-`py -m gogoweb.convert --help` or `py -m gogoweb.convert -h`
-</br></br>
+   Windows
+   ```
+   py -m gogoweb.convert --help
+   py -m gogoweb.convert -h
+   ```
+
+   Linux/MAC OS
+   ```
+   python3 -m gogoweb.convert -help
+   python3 -m gogoweb.convert -h
+   ```
 
 ### Convert .txt to .html
 
-`py -m gogoweb.convert <file or folder path>`
+   Windows
+   ```
+   py -m gogoweb.convert <file or folder path>
+   ```
+
+   Linux/MAC OS
+   ```
+   python3 -m gogoweb.convert <file or folder path>
+   ```
 
 #### Example 1 (Convert one file)
 `py -m gogoweb.convert ./examples/til_post1.txt`
@@ -67,12 +109,20 @@ Command-line tool that converts .txt or .md files into .html files.
 #### Example 2 (Convert a folder of files)
 `py -m gogoweb.convert ./examples`
 
-Output(s) can be found in til folder.
+Output(s) can be found in current workding directory's `til` folder.
 </br></br>
 
 ### Specify Output Location
 
-`py -m gogoweb.convert <file or folder path> -o <folder path>`
+   Windows
+   ```
+   py -m gogoweb.convert <file or folder path> -o <folder path>
+   ```
+
+   Linux/MAC OS
+   ```
+   python3 -m gogoweb.convert <file or folder path> -o <folder path>
+   ```
 
 #### Example
 `py -m gogoweb.convert ./examples/examples.txt -o ./examples`
@@ -80,7 +130,15 @@ Output(s) can be found in til folder.
 
 ### Specify Stylesheet
 
-`py -m gogoweb.convert <file or folder path> -s <stylesheet url>`
+   Windows
+   ```
+   py -m gogoweb.convert <file or folder path> -s <stylesheet url>
+   ```
+
+   Linux/MAC OS
+   ```
+   python3 -m gogoweb.convert <file or folder path> -s <stylesheet url>
+   ```
 
 #### Example
 `py -m gogoweb.convert ./examples/til_post2.txt -s https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css`
@@ -88,7 +146,15 @@ Output(s) can be found in til folder.
 
 ### Specify Config File
 
-`py -m gogoweb.convert <file or folder path> -c <config toml file path>`
+   Windows
+   ```
+   py -m gogoweb.convert <file or folder path> -c <config toml file path>
+   ```
+
+   Linux/MAC OS
+   ```
+   python3 -m gogoweb.convert <file or folder path> -c <config toml file path>
+   ```
 
 #### Example
 `py -m gogoweb.convert ./examples -c src/gogoweb/config.toml`
