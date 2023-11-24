@@ -49,49 +49,49 @@ Command-line tool that converts .txt or .md files into .html files.
 
 ### View App Version
 
-`py convert.py --version` or `py convert.py -v`
+`py -m gogoweb.convert --version` or `py -m gogoweb.convert -v`
 </br></br>
 
 ### View Usage Message
 
-`py convert.py --help` or `py convert.py -h`
+`py -m gogoweb.convert --help` or `py -m gogoweb.convert -h`
 </br></br>
 
 ### Convert .txt to .html
 
-`py convert.py <file or folder path>`
+`py -m gogoweb.convert <file or folder path>`
 
 #### Example 1 (Convert one file)
-`py convert.py ./examples/til_post1.txt`
+`py -m gogoweb.convert ./examples/til_post1.txt`
 
 #### Example 2 (Convert a folder of files)
-`py convert.py ./examples`
+`py -m gogoweb.convert ./examples`
 
 Output(s) can be found in til folder.
 </br></br>
 
 ### Specify Output Location
 
-`py convert.py <file or folder path> -o <folder path>`
+`py -m gogoweb.convert <file or folder path> -o <folder path>`
 
 #### Example
-`py convert.py ./examples/examples.txt -o ./examples`
+`py -m gogoweb.convert ./examples/examples.txt -o ./examples`
 </br></br>
 
 ### Specify Stylesheet
 
-`py convert.py <file or folder path> -s <stylesheet url>`
+`py -m gogoweb.convert <file or folder path> -s <stylesheet url>`
 
 #### Example
-`py convert.py ./examples/til_post2.txt -s https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css`
+`py -m gogoweb.convert ./examples/til_post2.txt -s https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css`
 </br></br>
 
 ### Specify Config File
 
-`py convert.py <file or folder path> -c <config toml file path>`
+`py -m gogoweb.convert <file or folder path> -c <config toml file path>`
 
 #### Example
-`py convert.py ./examples -c src/gogoweb/config.toml`
+`py -m gogoweb.convert ./examples -c src/gogoweb/config.toml`
 </br></br>
 
 ## Additional Features Available for Markdown
