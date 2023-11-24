@@ -1,7 +1,7 @@
 """Module contains unit tests for src/utils.py"""
 import os
 import pytest
-from src import utils as ut
+from src.gogoweb import utils as ut
 
 
 @pytest.mark.usefixtures('cleanup_cwd')
@@ -40,7 +40,7 @@ def test_format_path_display(tmp_path):
 def test_get_root_dir():
     """Tests get_root_dir function"""
     # Test that the root directory is the CWD, since tests should be executed while CWD is the root
-    assert ut.get_root_dir() == os.path.abspath(os.getcwd())
+    assert ut.get_root_dir() == os.path.abspath('src/gogoweb')
 
 
 def test_get_par_dir(tmp_path):

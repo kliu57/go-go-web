@@ -4,6 +4,7 @@ Command-line tool that converts .txt or .md files into .html files.
 
 ## Features
 
+- `v1.0.0` project package uploaded to [Test PyPI](https://test.pypi.org/project/gogoweb/1.0.0/)
 - `v0.0.5` additionally parses front matter from .md files for metadata
 - `v0.0.4` additionally accepts TOML config file
 - `v0.0.3` additionally parses code blocks and horizontal rules for .md files
@@ -29,55 +30,55 @@ Command-line tool that converts .txt or .md files into .html files.
    
 4. Check that you have the latest version of the app.
 
-   `python src/convert.py --version`
+   `py src/gogoweb/convert.py --version`
 
 ## Usage
 
 ### View App Version
 
-`python src/convert.py --version` or `python src/convert.py -v`
+`py src/gogoweb/convert.py --version` or `py src/gogoweb/convert.py -v`
 </br></br>
 
 ### View Usage Message
 
-`python src/convert.py --help` or `python src/convert.py -h`
+`py src/gogoweb/convert.py --help` or `py src/gogoweb/convert.py -h`
 </br></br>
 
 ### Convert .txt to .html
 
-`python src/convert.py <file or folder path>`
+`py src/gogoweb/convert.py <file or folder path>`
 
 #### Example 1 (Convert one file)
-`python src/convert.py ./examples/til_post1.txt`
+`py src/gogoweb/convert.py ./examples/til_post1.txt`
 
 #### Example 2 (Convert a folder of files)
-`python src/convert.py ./examples`
+`py src/gogoweb/convert.py ./examples`
 
 Output(s) can be found in til folder.
 </br></br>
 
 ### Specify Output Location
 
-`python src/convert.py <file or folder path> -o <folder path>`
+`py src/gogoweb/convert.py <file or folder path> -o <folder path>`
 
 #### Example
-`python src/convert.py ./examples/examples.txt -o ./examples`
+`py src/gogoweb/convert.py ./examples/examples.txt -o ./examples`
 </br></br>
 
 ### Specify Stylesheet
 
-`python src/convert.py <file or folder path> -s <stylesheet url>`
+`py src/gogoweb/convert.py <file or folder path> -s <stylesheet url>`
 
 #### Example
-`python src/convert.py ./examples/til_post2.txt -s https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css`
+`py src/gogoweb/convert.py ./examples/til_post2.txt -s https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css`
 </br></br>
 
 ### Specify Config File
 
-`python src/convert.py <file or folder path> -c <config toml file path>`
+`py src/gogoweb/convert.py <file or folder path> -c <config toml file path>`
 
 #### Example
-`python src/convert.py ./examples -c src/config.toml`
+`py src/gogoweb/convert.py ./examples -c src/gogoweb/config.toml`
 </br></br>
 
 ## Additional Features Available for Markdown

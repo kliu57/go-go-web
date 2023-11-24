@@ -19,11 +19,11 @@ def format_path_display(path):
     return path
 
 
-def get_root_dir():
-    """Function returns the parent directory of this utils file"""
-    return os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
-
-
 def get_par_dir(path):
     """"Function returns parent directory of given path"""
     return os.path.abspath(os.path.join(path, os.pardir))
+
+
+def get_root_dir():
+    """Function returns the root directory of package"""
+    return os.path.dirname(__file__)
