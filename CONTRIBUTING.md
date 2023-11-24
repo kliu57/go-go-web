@@ -14,7 +14,7 @@
 
    `python --version`
 
-3. Once you have been assigned, follow [these steps](https://docs.github.com/en/get-started/quickstart/contributing-to-projects) for forking and cloning the repo and creating a branch.
+3. Once you have been assigned, follow [these steps](https://docs.github.com/en/get-started/quickstart/contributing-to-projects). Fork the project on GitHub. Clone the repo to your local. Create a new topic branch named after the issue.
 
 4. Install packages.
 

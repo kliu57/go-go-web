@@ -4,7 +4,7 @@ Command-line tool that converts .txt or .md files into .html files.
 
 ## Features
 
-- `v1.0.0` project package uploaded to [Test PyPI](https://test.pypi.org/project/gogoweb/1.0.0/)
+- `v1.0.0` project package uploaded to [Test PyPI](https://test.pypi.org/project/gogoweb/)
 - `v0.0.5` additionally parses front matter from .md files for metadata
 - `v0.0.4` additionally accepts TOML config file
 - `v0.0.3` additionally parses code blocks and horizontal rules for .md files
@@ -15,70 +15,102 @@ Command-line tool that converts .txt or .md files into .html files.
 
 1. Download and install the latest version of [python](https://www.python.org/downloads/). Open a terminal and check that it is installed.
 
-   `python --version`
-   
-2. Open a terminal and navigate to where you want go-go-web to be stored. Clone this repository locally.
-    
-   `git clone https://github.com/kliu57/go-go-web.git`
+   `py --version`
 
-   `cd go-go-web`
+2. Make sure you have upgraded version of pip.
 
-3. Install packages
+   Windows
+   ```
+   py -m pip install --upgrade pip
+   ```
 
-   `pip install tomlkit`
-   `pip install python-frontmatter`
-   
-4. Check that you have the latest version of the app.
+   Linux/MAC OS
+   ```
+   python3 -m pip install --upgrade pip
+   ```
 
-   `py src/gogoweb/convert.py --version`
+3. Install gogoweb using pip.
+
+   Windows
+   ```
+   pip install gogoweb
+   ```
+
+   Linux/MAC OS
+   ```
+   python3 -m pip install gogoweb
+   ```
+
+4. Check the location of the installed files.
+
+   Windows
+   ```
+   pip show gogoweb
+   ```
+
+   Linux/MAC OS
+   ```
+   python3 -m pip show gogoweb
+   ```
+
+5. Append `\gogoweb` to the location path shown. Navigate to that location using `cd`, or simply go to that location in file explorer and open a terminal there.
+
+   ```
+   # this path will be different for each user depending on the result you get from Step 4
+   cd C:\Users\<your user>\AppData\Local\Programs\Python\Python312\Lib\site-packages\gogoweb
+   ```
+
+6. Check that you have the latest version of the app.
+
+   `py convert.py -v`
 
 ## Usage
 
 ### View App Version
 
-`py src/gogoweb/convert.py --version` or `py src/gogoweb/convert.py -v`
+`py convert.py --version` or `py convert.py -v`
 </br></br>
 
 ### View Usage Message
 
-`py src/gogoweb/convert.py --help` or `py src/gogoweb/convert.py -h`
+`py convert.py --help` or `py convert.py -h`
 </br></br>
 
 ### Convert .txt to .html
 
-`py src/gogoweb/convert.py <file or folder path>`
+`py convert.py <file or folder path>`
 
 #### Example 1 (Convert one file)
-`py src/gogoweb/convert.py ./examples/til_post1.txt`
+`py convert.py ./examples/til_post1.txt`
 
 #### Example 2 (Convert a folder of files)
-`py src/gogoweb/convert.py ./examples`
+`py convert.py ./examples`
 
 Output(s) can be found in til folder.
 </br></br>
 
 ### Specify Output Location
 
-`py src/gogoweb/convert.py <file or folder path> -o <folder path>`
+`py convert.py <file or folder path> -o <folder path>`
 
 #### Example
-`py src/gogoweb/convert.py ./examples/examples.txt -o ./examples`
+`py convert.py ./examples/examples.txt -o ./examples`
 </br></br>
 
 ### Specify Stylesheet
 
-`py src/gogoweb/convert.py <file or folder path> -s <stylesheet url>`
+`py convert.py <file or folder path> -s <stylesheet url>`
 
 #### Example
-`py src/gogoweb/convert.py ./examples/til_post2.txt -s https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css`
+`py convert.py ./examples/til_post2.txt -s https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css`
 </br></br>
 
 ### Specify Config File
 
-`py src/gogoweb/convert.py <file or folder path> -c <config toml file path>`
+`py convert.py <file or folder path> -c <config toml file path>`
 
 #### Example
-`py src/gogoweb/convert.py ./examples -c src/gogoweb/config.toml`
+`py convert.py ./examples -c src/gogoweb/config.toml`
 </br></br>
 
 ## Additional Features Available for Markdown
