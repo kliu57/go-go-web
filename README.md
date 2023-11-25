@@ -49,7 +49,13 @@ Command-line tool that converts .txt or .md files into .html files.
    python3 -m pip install gogoweb
    ```
 
-4. Check that you have the latest version of the app.
+4. Check that the package was installed
+
+   ```
+   pip show gogoweb
+   ```
+
+5. Check that you have the latest version of the app.
 
    Windows
    ```
@@ -60,6 +66,23 @@ Command-line tool that converts .txt or .md files into .html files.
    ```
    python3 -m gogoweb.convert -v
    ```
+   
+   If you get `ModuleNotFoundError: No module named 'gogoweb'`:
+
+   - Check the Location result from Step 4 to see which Python folder it installed to (Ex: Python311 is 3.11 and Python 312 is 3.12)
+   - Specify the Python version it was installed to when running the Python commands:
+  
+   Windows
+   ```
+   py -3.12 -m gogoweb.convert -v
+   ```
+
+   Linux/MAC OS
+   ```
+   python3 -3.12 -m gogoweb.convert -v
+   ```
+
+   If this works, you probably have multiple versions of Python on your machine. Specify the Python version when running commands.
 
 ## Usage
 
