@@ -25,6 +25,8 @@ Command-line tool that converts .txt or .md files into .html files.
    python3 --version
    ```
 
+   If it is not showing the latest version, you may have multiple versions of Python installed. Either uninstall Python and reinstall the latest, or more the environment variable for the latest version to a position above the older version. There are also other ways to switch between versions of Python not mentioned here.
+
 2. Make sure you have upgraded version of pip.
 
    Windows
