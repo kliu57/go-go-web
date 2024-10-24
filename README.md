@@ -29,12 +29,12 @@ Command-line tool that converts .txt or .md files into .html files.
 
    Windows
    ```
-   py -m pip install --upgrade pip
+   py -m ensurepip --upgrade
    ```
 
    Linux/MAC OS
    ```
-   python3 -m pip install --upgrade pip
+   python -m ensurepip --upgrade
    ```
 
 3. Install gogoweb using pip.

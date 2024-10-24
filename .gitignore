@@ -33,3 +33,7 @@ __pycache__
 # PyPI package
 dist
 gogoweb.egg-info
+
+#pip
+Lib
+Scripts
